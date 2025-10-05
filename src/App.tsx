@@ -98,28 +98,40 @@ int stack[SIZE], top = -1;
 // Function to push element
 void push(int x) {
     if (top == SIZE - 1) {
-        printf("Stack Overflow\\n");
+        printf("Stack Overflow\n");
     } else {                                                    top++;
-        stack[++top] = x;   this is same like this ->           stack[top] = item;  
-        printf("%d pushed to stack\\n", x);
+        stack[++top] = x;   this is same like this ->           stack[top] = item;              
+        printf("%d pushed to stack\n", x);
     }
 }
 
 // Function to pop element
 void pop() {
     if (top == -1) {
-        printf("Stack Underflow\\n");
+        printf("Stack Underflow\n");
     } else {
-        printf("%d popped from stack\\n", stack[top--]);
+        printf("%d popped from stack\n", stack[top--]);
     }
 }
 
 // Function to see top element
 void peek() {
     if (top == -1) {
-        printf("Stack is Empty\\n");
+        printf("Stack is Empty\n");
     } else {
-        printf("Top element is %d\\n", stack[top]);
+        printf("Top element is %d\n", stack[top]);
+    }
+}
+
+// Function to display all elements in stack
+void display() {
+    if (top == -1) {
+        printf("Stack is Empty\n");
+    } else {
+        printf("Stack elements are:\n");
+        for (int i = top; i >= 0; i--) {
+            printf("%d\n", stack[i]);
+        }
     }
 }
 
@@ -127,8 +139,10 @@ int main() {
     push(10);
     push(20);
     push(30);
+    display();    // Display all elements
     peek();       // Shows 30
     pop();        // Removes 30
+    display();    // Display after pop
     peek();       // Shows 20
     return 0;
 }
@@ -226,13 +240,22 @@ End → pop remaining - → output = A B + C * D - ✅
       A B + C * D -
 
 -------------------------------------------------------------------------------------
+🧠 Explanation
+
+Postfix (Reverse Polish Notation) → Operators come after operands.
+Example: (A+B)*C-D → AB+C*D-
+
+Prefix (Polish Notation) → Operators come before operands.
+Example: (A+B)*C-D → -*+ABCD
+
+
 
 🔹 C Example Code
 
 
 #include <stdio.h>
-#include <ctype.h>   // for isalnum
 #include <string.h>
+#include <ctype.h>   // for isalnum
 
 #define SIZE 100
 char stack[SIZE];
@@ -253,27 +276,26 @@ int precedence(char c) {
     return -1;
 }
 
+// Function to convert infix to postfix
 void infixToPostfix(char* exp) {
     char result[SIZE];
     int k = 0;
+    top = -1;
+
     for (int i = 0; exp[i]; i++) {
         char c = exp[i];
 
-        // If operand, add to result
         if (isalnum(c)) {
             result[k++] = c;
         }
-        // If '(', push to stack
         else if (c == '(') {
             push(c);
         }
-        // If ')', pop until '('
         else if (c == ')') {
             while (top != -1 && stack[top] != '(')
                 result[k++] = pop();
             pop(); // remove '('
         }
-        // If operator
         else {
             while (top != -1 && precedence(stack[top]) >= precedence(c))
                 result[k++] = pop();
@@ -281,23 +303,88 @@ void infixToPostfix(char* exp) {
         }
     }
 
-    // Pop remaining operators
     while (top != -1)
         result[k++] = pop();
 
-    result[k] = '\0';
-    printf("Postfix: %s\\n", result);
+    result[k] = '\0';                  '\0' -> Marks the end of a C string
+    printf("Postfix: %s\n", result);
+}
+
+// Helper function to reverse a string
+void reverse(char* str) {
+    int len = strlen(str);
+    for (int i = 0; i < len / 2; i++) {             In C, when you divide two integers, the fractional part is discarded (not rounded).
+        char temp = str[i];                         So, for example, 5 / 2 = 2 (not 2.5).
+        str[i] = str[len - i - 1];
+        str[len - i - 1] = temp;
+    }
+}
+
+// Function to convert infix to prefix
+void infixToPrefix(char* exp) {
+    char result[SIZE];
+    int k = 0;
+    top = -1;
+
+    // Step 1: Reverse the infix expression
+    reverse(exp);
+
+    // Step 2: Swap '(' and ')'
+    for (int i = 0; exp[i]; i++) {
+        if (exp[i] == '(') exp[i] = ')';
+        else if (exp[i] == ')') exp[i] = '(';
+    }
+
+    // Step 3: Convert to postfix (of reversed)
+    for (int i = 0; exp[i]; i++) {
+        char c = exp[i];
+
+        if (isalnum(c)) {
+            result[k++] = c;
+        }
+        else if (c == '(') {
+            push(c);
+        }
+        else if (c == ')') {
+            while (top != -1 && stack[top] != '(')
+                result[k++] = pop();
+            pop(); // remove '('
+        }
+        else {
+            while (top != -1 && precedence(stack[top]) > precedence(c))
+                result[k++] = pop();
+            push(c);
+        }
+    }
+
+    while (top != -1)
+        result[k++] = pop();
+
+    result[k] = '\0';                   '\0' -> Marks the end of a C string
+
+    // Step 4: Reverse the result to get prefix
+    reverse(result);
+    printf("Prefix: %s\n", result);
 }
 
 int main() {
     char exp[] = "(A+B)*C-D";
+    printf("Infix: %s\n", exp);
     infixToPostfix(exp);
+
+    // Make a copy because infixToPrefix modifies it
+    char exp2[] = "(A+B)*C-D";
+    infixToPrefix(exp2);
+
     return 0;
 }
 
 
+
 👉 Output:
+  Infix: (A+B)*C-D
   Postfix: AB+C*D-
+  Prefix: - * + A B C D
 
 
 🔑 Key Rule:
@@ -465,7 +552,7 @@ void enqueue(int x) {
 {this queue is used only one time, after that it is full or empty.}
 
 void dequeue() {
-    if (front == -1 || front > rear) {
+    if (front == -1 || front > rear) {          you must be used this condition front > rear because after some dequeue operation front will be greater than rear
         printf("Queue Underflow\\n");
     } else {
         printf("%d dequeued from queue\\n", queue[front++]);
@@ -476,7 +563,7 @@ void dequeue() {
 {used this code for used queue again and again}
 
 void dequeue() {
-    if (front == -1 || front > rear) {
+    if (front == -1 || front > rear) {            you can used front == rear condition so you don't need write this condition (front > rear)
         printf("Queue Underflow\\n");
     } else {
         printf("%d dequeued from queue\\n", queue[front]);
@@ -671,10 +758,10 @@ void display() {
     if (rear >= front) {
         for (int i = front; i <= rear; i++)
             printf("%d ", queue[i]);
-    } else {
-        for (int i = front; i < SIZE; i++)
+    } else {                                        this conditiom is used when rear < front
+        for (int i = front; i < SIZE; i++)          It is used to display elements from front to end of array (like print last part of array)
             printf("%d ", queue[i]);
-        for (int i = 0; i <= rear; i++)
+        for (int i = 0; i <= rear; i++)             It is used to display elements from start of array to rear (like print first part of array)
             printf("%d ", queue[i]);
     }
     printf("\\n");
@@ -692,6 +779,90 @@ int main() {
     display();
     return 0;
 }
+
+output:
+
+10 enqueued
+20 enqueued
+30 enqueued
+40 enqueued
+50 enqueued
+Queue: 10 20 30 40 50 
+10 dequeued
+60 enqueued
+Queue: 20 30 40 50 60 
+
+--------------------------------------------------------------------------------
+this is how display function works when rear < front
+
+⚙️ Suppose queue size = 5
+
+Let’s take SIZE = 5.
+
+| Index  | 0  | 1    | 2 | 3     | 4  |
+| ------ | -- | ---- | - | ----- | -- |
+| Value  | 10 | 20   | — | 30    | 40 |
+|        | ↑  | ↑    |   | ↑     | ↑  |
+| rear=1 |    | rear |   | front |    |
+
+
+So:
+    front = 3  
+    rear = 1
+
+That gives us elements:
+    queue[3] = 30
+    queue[4] = 40
+    queue[0] = 10
+    queue[1] = 20
+
+✅ Output → 30 40 10 20
+
+Now to display:
+
+    First loop prints queue[3], queue[4]
+    Second loop prints queue[0], queue[1]
+
+
+🧩 Now step-by-step function calls (the fun part!)
+
+Let’s change main() a bit to see the interesting circular case:
+
+int main() {
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+    enqueue(40);
+    dequeue();  // removes 10
+    dequeue();  // removes 20
+    enqueue(50);
+    enqueue(60);
+    display();  // this will print 30, 40, 50, 60 (circular order)
+}
+
+
+🔍 Step-by-step trace
+| Step | Operation   | front | rear        | Queue array          | Output      |
+| ---- | ----------- | ----- | ----------- | -------------------- | ----------- |
+| 1    | enqueue(10) | 0     | 0           | [10, -, -, -, -]     | 10 enqueued |
+| 2    | enqueue(20) | 0     | 1           | [10, 20, -, -, -]    | 20 enqueued |
+| 3    | enqueue(30) | 0     | 2           | [10, 20, 30, -, -]   | 30 enqueued |
+| 4    | enqueue(40) | 0     | 3           | [10, 20, 30, 40, -]  | 40 enqueued |
+| 5    | dequeue()   | 1     | 3           | [10, 20, 30, 40, -]  | 10 dequeued |
+| 6    | dequeue()   | 2     | 3           | [10, 20, 30, 40, -]  | 20 dequeued |
+| 7    | enqueue(50) | 2     | 4           | [10, 20, 30, 40, 50] | 50 enqueued |
+| 8    | enqueue(60) | 2     | 0 (wrapped) | [60, 20, 30, 40, 50] | 60 enqueued |
+
+
+Now, front = 2, rear = 0
+Order is:
+[30, 40, 50, 60]
+
+
+Why it prints in that order
+From index 2 → 4 → prints 30, 40, 50
+Then wraps around and prints 0 → 0 → 60
+
 
 
 -------------------------------------------------------------------------------
@@ -1161,6 +1332,17 @@ A Priority Queue is an abstract data type that operates similar to a regular que
 If two elements have the same priority, they are served according to their order in the queue (FIFO for same priority).
 
 
+➡️ In a normal queue, elements are served in First In First Out (FIFO) order.
+➡️ In a priority queue, elements are served according to priority, not arrival order.
+
+🧩 Types of Priority Queues
+
+| Type                          | Description                                    |
+| ----------------------------- | ---------------------------------------------- |
+| **Ascending Priority Queue**  | Lower number = higher priority (1 is highest)  |
+| **Descending Priority Queue** | Higher number = higher priority (9 is highest) |
+
+
 Enqueue Algorithm:
 
 1. If n == SIZE, then print Overflow (queue full) and return.
@@ -1226,7 +1408,7 @@ void enqueue(int value) {
     }
     int i = n - 1;
     // Shift elements to maintain ascending order
-    while (i >= 0 && pq[i] > value) {
+    while (i >= 0 && pq[i] > value) {                       you only change for descending priority queue pq[i] < value
         pq[i + 1] = pq[i];
         i--;
     }
@@ -1242,7 +1424,7 @@ void dequeue() {
         return;
     }
     printf("%d deleted (highest priority)\\n", pq[0]);
-    for (int i = 0; i < n - 1; i++) {
+    for (int i = 0; i < n - 1; i++) {                          -> this for loop is used to shift left all elements after dequeue operation
         pq[i] = pq[i + 1];
     }
     n--;
