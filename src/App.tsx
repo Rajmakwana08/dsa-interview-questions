@@ -1339,8 +1339,8 @@ If two elements have the same priority, they are served according to their order
 
 | Type                          | Description                                    |
 | ----------------------------- | ---------------------------------------------- |
-| **Ascending Priority Queue**  | Lower number = higher priority (1 is highest)  |
-| **Descending Priority Queue** | Higher number = higher priority (9 is highest) |
+| Ascending Priority Queue      | Lower number = higher priority (1 is highest)  |
+| Descending Priority Queue     | Higher number = higher priority (9 is highest) |
 
 
 Enqueue Algorithm:
@@ -3484,11 +3484,1067 @@ Algorithm Display():
 `
     },
     {
+      id: 12,
+      question: "12. Explain Tree or what is tree (concept and terminologies of tree)",
+      answer: "",
+      codeExample: `
+🌲 What is a Tree?
+
+A Tree is a non-linear data structure that stores data in a hierarchical (top-down) form.
+It looks like an upside-down tree with one root and many branches.
+
+
+
+🔹 Example:
+
+          A          ← Root
+         / \
+        B   C        ← Children
+       / \   \
+      D   E   F      ← Leaf Nodes
+
+
+Here:
+    A is the root node 
+    B and C are children of A
+    D, E, F are leaf nodes (no children)
+
+
+🔹 Basic Terms in Tree
+| Term      | Meaning                                 |
+| ----------| --------------------------------------- |
+| Root      | The topmost node (starting point)       |
+| Parent    | A node that has child nodes             |
+| Child     | A node that descends from another node  |
+| Leaf Node | Node with no children                   |
+| Edge      | Connection between two nodes            |
+| Path      | Sequence of nodes connected by edges    |
+| Level     | Distance from the root (root = level 0) |
+| Height    | Longest path from root to any leaf      |
+| Degree    | Number of children a node has           |
+
+
+
+🔹 Types of Trees
+
+1. General Tree → Any number of children.                                       ------ 
+2. Binary Tree → Each node has at most two children (Left and Right).           ------
+3. Binary Search Tree (BST) → Left child < Root < Right child.                  ------
+4. Full Binary Tree → Every node has 0 or 2 children.                           
+5. Complete Binary Tree → All levels are filled except possibly the last.       ------
+6. AVL Tree → Balanced Binary Search Tree (difference of heights ≤ 1).         
+7. B-Tree / B+ Tree → Used in databases and file systems.                       
+
+
+
+🔹 Advantages of Tree
+
+✅ Reflects hierarchical structure (like family tree, file system).
+✅ Faster search than linked lists (especially in Binary Search Trees).
+✅ Used in decision-making, indexing, and expression evaluation.
+
+🔹 Real-Life Examples
+
+Family Tree (Parent–Child relationships)
+Computer File System (Folders and subfolders)
+Organization Chart (CEO → Manager → Employee)
+Decision Trees (used in AI and ML)
+
+
+
+🔹 Tree Traversals
+
+To access all nodes, we use traversal methods:
+
+1. Inorder (Left, Root, Right)
+    Output nodes in sorted order for BST.
+
+2. Preorder (Root, Left, Right)
+    Used to create a copy of the tree.
+
+3. Postorder (Left, Right, Root)
+    Used to delete the tree safely.
+
+🔹 Example (Binary Tree Traversal)
+
+      A
+     / \
+    B   C
+   / \
+  D   E
+
+
+| Traversal Type | Order of Visiting Nodes |
+| -------------- | ----------------------- |
+| Inorder        | D, B, E, A, C           |
+| Preorder       | A, B, D, E, C           |
+| Postorder      | D, E, B, C, A           |
+
+
+✅ In short:
+
+    A Tree is a hierarchical data structure with nodes connected by edges.
+    It starts from a root node and branches out to child nodes — just like a real tree.
+
+`
+    },
+    {
+      id: 12.1,
+      question: "12.1 Explain General Tree",
+      answer: "",
+      codeExample: `
+🌳 Definition:
+
+A General Tree is a non-linear data structure in which each node can have any number of children (not limited to 2 like a Binary Tree).
+
+Each node contains:
+
+    Data (value)
+    Links to its child nodes
+
+There is one special node called the root node, and all other nodes are connected below it.
+
+🧩 Structure of a General Tree:
+
+           A
+        /  |  \
+       B   C   D
+          / \
+         E   F
+
+Explanation:
+
+Node A is the root node.
+A has 3 children → B, C, D.
+Node C has 2 children → E, F.
+B, D, E, and F are leaf nodes (no children).
+
+
+🏗 Basic Terms:
+| Term      | Description                                             |
+| ----------| ------------------------------------------------------- |
+| Root      | The topmost node of the tree (like A).                  |
+| Parent    | A node that has child nodes (like C is parent of E, F). |
+| Child     | Nodes that are descendants of a parent node.            |
+| Leaf Node | Node with no children (like B, D, E, F).                |
+| Siblings  | Nodes having the same parent (like E and F).            |
+| Level     | Distance of a node from the root (Root = level 0).      |
+
+
+⚙️ Algorithm (General Idea to Create a General Tree):
+
+There is no single simple array-based representation like binary trees.
+Usually, general trees are represented using the Child-Sibling Representation.
+
+📘 Child-Sibling Representation:
+
+Each node has two pointers:
+
+    firstChild → points to its first child.
+    nextSibling → points to its next sibling.
+
+Example in structure form:
+
+struct Node {
+    char data;
+    struct Node* firstChild;
+    struct Node* nextSibling;
+};
+
+
+
+✅ Advantages of General Tree:
+
+More flexible than binary trees.
+Represents hierarchical structures like organization charts, file systems, etc.
+Useful when nodes can have varying numbers of children.
+
+💡 Real-life Examples:
+| Example            | Explanation                                    |
+| -------------------| ---------------------------------------------- |
+| File system        | A folder can contain many files or subfolders. |
+| Organization chart | A manager can have multiple subordinates.      |
+| HTML Document      | Each tag can have multiple nested tags.        |
+
+
+`
+    },
+    {
+      id: 12.2,
+      question: "12.2 Explain Binary Tree",
+      answer: "",
+      codeExample: `
+🌳 Definition:
+
+A Binary Tree is a type of tree data structure in which each node can have at most two children —
+usually referred to as the left child and the right child.
+
+🧠 Structure of a Binary Tree:
+
+        A
+       / \
+      B   C
+     / \
+    D   E
+
+
+Explanation:
+
+    A → Root node
+    B and C → Children of A
+    D and E → Children of B
+    Nodes C, D, and E are leaf nodes (no children).
+    
+
+⚙️ Basic Terms:    
+| Term      | Description                                               |
+| ----------| --------------------------------------------------------- |
+| Root      | The topmost node (A).                                     |
+| Parent    | A node that has child nodes (like B).                     |
+| Child     | A node below a parent node (like D, E are children of B). |
+| Leaf Node | Node with no children (like D, E, C).                     |
+| Subtree   | Any node and all its descendants.                         |
+| Level     | Distance from the root (Root = Level 0).                  |
+| Height    | Number of edges in the longest path from root to a leaf.  |
+
+
+
+🏗 Structure in C:
+
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+
+Each node contains:
+data → stores the value
+left → pointer to the left child
+right → pointer to the right child
+
+
+
+🧩 Types of Binary Trees:
+
+| Type                     | Description                                                                         |
+| -------------------------| ----------------------------------------------------------------------------------- |
+| Full Binary Tree         | Every node has 0 or 2 children.                                                     |
+| Complete Binary Tree     | All levels are filled except possibly the last, which is filled from left to right. |
+| Perfect Binary Tree      | All internal nodes have 2 children, and all leaf nodes are at the same level.       |
+| Skewed Binary Tree       | All nodes have only one child (either left or right).                               |
+| Binary Search Tree (BST) | Left < Root < Right (special binary tree used for searching).                       |
+
+
+🔄 Tree Traversals (Ways to Visit All Nodes):
+| Traversal Type | Order               | Example Output |
+| -------------- | ------------------- | -------------- |
+| Inorder        | Left → Root → Right | D, B, E, A, C  |
+| Preorder       | Root → Left → Right | A, B, D, E, C  |
+| Postorder      | Left → Right → Root | D, E, B, C, A  |
+
+
+💡 Real-Life Examples:
+| Example             | Description                                                  |
+| ------------------- | ------------------------------------------------------------ |
+| Decision Tree       | Used in AI and machine learning for decision-making.         |
+| File System         | Directory structure with subfolders (binary-like hierarchy). |
+| Expression Tree     | Used in compilers to evaluate mathematical expressions.      |
+
+
+⚡ Advantages:
+
+Faster searching and sorting (especially in BST).
+Useful for hierarchical data representation.
+Easy to implement recursive algorithms.
+
+`
+    },
+    {
+      id: 1221,
+      question: "12.2.1 Explain Complete Binary Tree ",
+      answer: "",
+      codeExample: `
+🌳 Definition:
+
+A Complete Binary Tree is a type of binary tree in which all levels are completely filled,
+except possibly the last level, which is filled from left to right.
+
+👉 In simple words:
+
+Every level is full.
+The last level may not be full, but all its nodes appear as left as possible.
+
+
+🧠 Example 1: Complete Binary Tree
+        1
+       / \
+      2   3
+     / \  /
+    4  5 6
+
+
+✅ Why it’s Complete:
+
+    Levels 1 and 2 are completely filled.
+    Level 3 has 3 nodes (4, 5, 6), all placed from left to right.
+
+
+
+❌ Example 2: Not Complete
+
+        1
+       / \
+      2   3
+       \   \
+        5   6
+
+❌ Why not complete:
+
+The leftmost position at the last level (under 2) is empty,
+but a node exists to the right, which breaks the rule.
+
+
+⚡ Advantages:
+
+Efficient memory usage — no large gaps in nodes.
+Ideal for heap structures (used in Priority Queues).
+Easy to store in arrays because of its predictable structure.
+
+
+
+🧮 Array Representation Example:
+
+You can store a Complete Binary Tree in an array like this:
+
+Index:  0  1  2  3  4  5
+Value: [1, 2, 3, 4, 5, 6]
+
+
+For any node at index i:
+
+    Left child = 2i + 1
+    Right child = 2i + 2
+    Parent = (i - 1) / 2
+
+      `
+    },
+    {
+      id: 1222,
+      question: "12.2.2 Explain Binary Search Tree",
+      answer: "",
+      codeExample: `
+🌳 Definition:
+
+A Binary Search Tree (BST) is a special type of Binary Tree where:
+
+    Each node contains a unique value.
+    The left subtree of a node contains values smaller than the node’s value.
+    The right subtree of a node contains values greater than the node’s value.
+    Both left and right subtrees must also be Binary Search Trees.
+
+🧠 Example of a BST
+
+        50
+       /  \
+     30    70
+    / \    / \
+   20 40  60 80
+
+
+✅ Why this is a BST:
+
+Left child < Parent (30 < 50)
+Right child > Parent (70 > 50)
+And this rule applies to every subtree.
+
+
+
+❌ Not a BST Example
+        50
+       /  \
+     70    30
+
+
+❌ Here, 70 is in the left subtree but greater than 50 → violates BST rule.
+
+
+⚙️ Properties of BST
+| Property                 | Description                        |
+| -------------------------| ---------------------------------- |
+| Left < Root < Right      | Key rule of BST                    |
+| Inorder Traversal        | Always gives sorted order          |
+| Search Efficiency        | Average time complexity = O(log n) |
+| Worst Case (Skewed Tree) | Time complexity = O(n)             |
+
+
+
+💡 Real-Life Examples:
+| Example                 | Description                           |
+| ------------------------| ------------------------------------- |
+| Phonebook               | Searching names in alphabetical order |
+| Database Indexing       | Faster searching, insertion, deletion |
+| Auto-suggestion systems | Searching words based on order        |
+
+
+
+🧩 C Structure of BST
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+// Function to create a new node
+struct Node* newNode(int value) {
+    struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+    temp->data = value;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+
+
+
+⚙️ Algorithms of BST
+
+1️⃣ Insertion
+Algorithm Insert(root, value)
+1. If root is NULL → create a new node and return it.
+2. If value < root->data → Insert in left subtree.
+3. Else if value > root->data → Insert in right subtree.
+4. Return root.
+
+
+2️⃣ Searching
+Algorithm Search(root, value)
+1. If root is NULL → return "Not Found".
+2. If value == root->data → return "Found".
+3. If value < root->data → search in left subtree.
+4. Else → search in right subtree.
+
+
+3️⃣ Deletion
+Algorithm Delete(root, value)
+1. Search for the node to delete.
+2. Case 1: Node has no children → delete it.
+3. Case 2: Node has one child → replace with child.
+4. Case 3: Node has two children → find inorder successor (smallest in right subtree), replace node’s value, then delete successor.
+
+
+4️⃣ Traversals
+| Type      | Order               | Output for Example Tree    |
+| ----------| ------------------- | -------------------------- |
+| Inorder   | Left → Root → Right | 20, 30, 40, 50, 60, 70, 80 |
+| Preorder  | Root → Left → Right | 50, 30, 20, 40, 70, 60, 80 |
+| Postorder | Left → Right → Root | 20, 40, 30, 60, 80, 70, 50 |
+
+
+
+✅ Complete Example: BST Implementation in C
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+struct Node* newNode(int value) {
+    struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+    temp->data = value;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+
+// Insert
+struct Node* insert(struct Node* root, int value) {
+    if (root == NULL)
+        return newNode(value);
+    if (value < root->data)
+        root->left = insert(root->left, value);
+    else if (value > root->data)
+        root->right = insert(root->right, value);
+    return root;
+}
+
+// Inorder Traversal
+void inorder(struct Node* root) {
+    if (root != NULL) {
+        inorder(root->left);
+        printf("%d ", root->data);
+        inorder(root->right);
+    }
+}
+
+// Search
+struct Node* search(struct Node* root, int value) {
+    if (root == NULL || root->data == value)
+        return root;
+    if (value < root->data)
+        return search(root->left, value);
+    return search(root->right, value);
+}
+
+int main() {
+    struct Node* root = NULL;
+    root = insert(root, 50);
+    insert(root, 30);
+    insert(root, 70);
+    insert(root, 20);
+    insert(root, 40);
+    insert(root, 60);
+    insert(root, 80);
+
+    printf("Inorder traversal (Sorted order): ");
+    inorder(root);
+
+    int key = 60;
+    if (search(root, key))
+        printf("\n%d found in the BST\n", key);
+    else
+        printf("\n%d not found in the BST\n", key);
+
+    return 0;
+}
+
+⚡ Output:
+Inorder traversal (Sorted order): 20 30 40 50 60 70 80
+60 found in the BST
+
+      `
+    },
+    {
+      id: 1223,
+      question: "12.2.3  Explain Full Binary Tree.",
+      answer: "",
+      codeExample: `
+🌳 Definition:
+
+A Full Binary Tree (also called a Proper or Strict Binary Tree) is a binary tree in which every node has either:
+
+0 children (leaf node) or
+2 children (internal node)
+
+👉 No node in a full binary tree has only one child.
+
+
+🧠 Example of a Full Binary Tree
+        1
+       / \
+      2   3
+     / \ / \
+    4  5 6  7
+
+
+✅ Why it’s full:
+
+    Node 1 has two children (2, 3)
+    Node 2 has two children (4, 5)
+    Node 3 has two children (6, 7)
+    Nodes 4, 5, 6, 7 have no children (leaf nodes)
+
+Hence, all nodes have either 0 or 2 children.
+
+
+❌ Not a Full Binary Tree Example
+        1
+       / \
+      2   3
+       \
+        4
+
+
+❌ Node 2 has only one child (4) → breaks the full binary tree rule.
+
+⚙️ Properties of a Full Binary Tree
+| Property                  | Description                                      |
+| --------------------------| ------------------------------------------------ |
+| Each node                 | Has either 0 or 2 children                       |
+| Number of leaf nodes (L)  | L = I + 1 (where I = number of internal nodes) |
+| Total nodes (N)           | N = 2 * I + 1                                  |
+| Height (h)                | h = log₂(L) (approx.)                          |
+| Maximum nodes at height h | 2^(h+1) - 1                                    |
+
+
+
+🧮 Example Calculation
+
+If a full binary tree has 7 nodes,
+then number of internal nodes = 3,
+and number of leaf nodes = 4.
+✅ Because: L = I + 1 → 4 = 3 + 1.
+
+
+
+🧩 C Representation of Full Binary Tree
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+// Function to create a new node
+struct Node* newNode(int value) {
+    struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+    temp->data = value;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+
+// Preorder traversal
+void preorder(struct Node* root) {
+    if (root != NULL) {
+        printf("%d ", root->data);
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
+
+int main() {
+    // Create Full Binary Tree
+    struct Node* root = newNode(1);
+    root->left = newNode(2);
+    root->right = newNode(3);
+    root->left->left = newNode(4);
+    root->left->right = newNode(5);
+    root->right->left = newNode(6);
+    root->right->right = newNode(7);
+
+    printf("Preorder traversal of Full Binary Tree: ");
+    preorder(root);
+    return 0;
+}
+
+
+⚡ Output:
+Preorder traversal of Full Binary Tree: 1 2 4 5 3 6 7
+
+
+
+💡 Real-Life Examples of Full Binary Trees
+| Example                     | Description                                                                     |
+| ----------------------------| ------------------------------------------------------------------------------- |
+| Tournament Bracket          | Every match has exactly 2 players (2 children) until one winner (root) remains. |
+| Decision Tree (Yes/No type) | Each question splits into exactly two possible answers.                         |
+| Expression Tree             | Every operator has exactly two operands.                                        |
+
+
+✅ Advantages
+
+    Efficient structure for recursion and binary operations.
+    Easy to store in arrays.
+    Reduces unnecessary memory usage.
+      `
+    },
+    {
+      id: 12.3,
+      question: "12.3 Explain AVL Tree",
+      answer: "",
+      codeExample: `
+🌳 Definition:
+
+An AVL Tree is a type of self-balancing Binary Search Tree (BST).
+It was invented by Adelson-Velsky and Landis (AVL) — hence the name.
+
+👉 In an AVL Tree, the difference between the heights of the left and right subtrees of any node is at most 1.
+
+
+🧠 Balance Factor (BF):
+
+For each node:
+    Balance Factor (BF) = height(left subtree) - height(right subtree)
+
+
+✅ The Balance Factor can be:
+
+-1, 0, or +1
+
+❌ If BF < -1 or BF > +1 → The tree is unbalanced and needs to be rotated to restore balance.
+
+
+🌿 Example of an AVL Tree
+
+        30
+       /  \
+     20    40
+    /
+   10
+
+
+Balance Factor for each node:
+
+10 → 0
+20 → 1
+40 → 0
+30 → 1
+
+✅ All nodes have BF in {-1, 0, +1} → It’s a balanced AVL Tree.
+
+
+❌ Example of Unbalanced Tree
+
+      30
+     /
+    20
+   /
+  10
+
+
+Here:
+    30 → BF = 2 (too high!)
+    So, it’s not balanced → needs rotation.
+
+
+⚙️ Balancing Using Rotations
+
+There are 4 types of rotations used to fix unbalanced AVL trees:
+
+| Case             | Condition                                 | Rotation Used         |
+| -----------------| ----------------------------------------- | ----------------------|
+| LL (Left-Left)   | Insertion in left subtree of left child   | Right Rotation        |
+| RR (Right-Right) | Insertion in right subtree of right child | Left Rotation         |
+| LR (Left-Right)  | Insertion in right subtree of left child  | Left + Right Rotation |
+| RL (Right-Left)  | Insertion in left subtree of right child  | Right + Left Rotation |
+
+
+
+🔁 1. LL Rotation (Right Rotation)
+
+Unbalanced:
+        30
+       /
+      20
+     /
+    10
+
+After Right Rotation:
+        20
+       /  \
+     10    30
+
+
+
+🔁 2. RR Rotation (Left Rotation)
+
+Unbalanced:
+      10
+        \
+         20
+           \
+            30
+
+After Left Rotation:
+        20
+       /  \
+     10    30
+
+
+
+🔁 3. LR Rotation (Left-Right Rotation)
+
+Unbalanced:
+        30
+       /
+      10
+        \
+         20
+
+After LR Rotation:
+        20
+       /  \
+     10    30
+
+
+
+🔁 4. RL Rotation (Right-Left Rotation)
+
+Unbalanced:
+      10
+        \
+         30
+        /
+      20
+
+After RL Rotation:
+        20
+       /  \
+     10    30
+
+
+
+🧩 C Structure of AVL Tree
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+    int height;
+};
+
+// Function to get height of tree
+int height(struct Node *N) {
+    if (N == NULL)
+        return 0;
+    return N->height;
+}
+
+// Create a new node
+struct Node* newNode(int value) {
+    struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+    node->data = value;
+    node->left = node->right = NULL;
+    node->height = 1;
+    return node;
+}
+
+// Get balance factor
+int getBalance(struct Node *N) {
+    if (N == NULL)
+        return 0;
+    return height(N->left) - height(N->right);
+}
+
+// Right rotation
+struct Node* rightRotate(struct Node *y) {
+    struct Node *x = y->left;
+    struct Node *T2 = x->right;
+
+    x->right = y;
+    y->left = T2;
+
+    y->height = 1 + (height(y->left) > height(y->right) ? height(y->left) : height(y->right));
+    x->height = 1 + (height(x->left) > height(x->right) ? height(x->left) : height(x->right));
+
+    return x;
+}
+
+// Left rotation
+struct Node* leftRotate(struct Node *x) {
+    struct Node *y = x->right;
+    struct Node *T2 = y->left;
+
+    y->left = x;
+    x->right = T2;
+
+    x->height = 1 + (height(x->left) > height(x->right) ? height(x->left) : height(x->right));
+    y->height = 1 + (height(y->left) > height(y->right) ? height(y->left) : height(y->right));
+
+    return y;
+}
+
+// Insert node
+struct Node* insert(struct Node* node, int key) {
+    if (node == NULL)
+        return newNode(key);
+
+    if (key < node->data)
+        node->left = insert(node->left, key);
+    else if (key > node->data)
+        node->right = insert(node->right, key);
+    else
+        return node;
+
+    node->height = 1 + (height(node->left) > height(node->right) ? height(node->left) : height(node->right));
+
+    int balance = getBalance(node);
+
+    // LL Case
+    if (balance > 1 && key < node->left->data)
+        return rightRotate(node);
+
+    // RR Case
+    if (balance < -1 && key > node->right->data)
+        return leftRotate(node);
+
+    // LR Case
+    if (balance > 1 && key > node->left->data) {
+        node->left = leftRotate(node->left);
+        return rightRotate(node);
+    }
+
+    // RL Case
+    if (balance < -1 && key < node->right->data) {
+        node->right = rightRotate(node->right);
+        return leftRotate(node);
+    }
+
+    return node;
+}
+
+// Inorder Traversal
+void inorder(struct Node* root) {
+    if (root != NULL) {
+        inorder(root->left);
+        printf("%d ", root->data);
+        inorder(root->right);
+    }
+}
+
+int main() {
+    struct Node *root = NULL;
+
+    root = insert(root, 30);
+    root = insert(root, 20);
+    root = insert(root, 40);
+    root = insert(root, 10);
+    root = insert(root, 25);
+    root = insert(root, 50);
+
+    printf("Inorder traversal of AVL Tree: ");
+    inorder(root);
+    return 0;
+}
+
+
+⚡ Output:
+Inorder traversal of AVL Tree: 10 20 25 30 40 50
+
+
+
+✅ Advantages of AVL Tree:
+
+| Advantage          | Explanation                                       |
+| -------------------| ------------------------------------------------- |
+| Self-balancing     | Prevents tree from becoming skewed                |
+| Faster searching   | O(log n) time complexity                          |
+| Better performance | Insertion, deletion, and search are all efficient |
+| Used in databases  | For indexing and searching operations             |
+
+
+❌ Disadvantages:
+
+| Disadvantage                  | Explanation                            |
+| ----------------------------- | -------------------------------------- |
+| More complex                  | Requires rotations and height tracking |
+| Slower insertion/deletion     | Because of rebalancing steps           |
+
+
+
+💡 Real-Life Applications:
+
+    Databases for maintaining sorted data
+    Memory management systems
+    File indexing systems
+    Search engines (to store sorted words or URLs)
+
+`
+    },
+    {
+      id: 12.4,
+      question: "12.4 Explain B-Tree / B+ Tree",
+      answer: "",
+      codeExample: `
+🌳 1. B-Tree (Balanced Tree)
+Definition:
+
+A B-Tree is a self-balancing search tree where each node can have multiple keys and children.
+It keeps data sorted and allows search, insertion, and deletion operations in logarithmic time.
+
+Properties of B-Tree:
+
+    1. All leaves are at the same level.
+    2. Each node contains multiple keys.
+    3. A node with n keys has (n + 1) children.
+    4. The keys inside a node are sorted in ascending order.
+    5. All data is stored in every node (internal + leaf nodes).
+    6. The tree grows and shrinks from the root, keeping it balanced.
+
+Example Structure:
+
+             [30]
+           /     \
+       [10,20]   [40,50,60]
+
+
+Root has one key → 30
+Left child has keys → 10, 20
+Right child has keys → 40, 50, 60
+
+
+Operations:
+
+    Search: Similar to binary search but across multiple keys per node.
+    Insertion: Add the key in sorted order; if a node overflows, split it.
+    Deletion: Remove the key; if underflow occurs, merge or redistribute nodes.
+
+
+Applications:
+
+Database indexing
+File system storage
+Multilevel memory indexing (e.g., SSD, HDD)
+
+
+
+🌳 2. B+ Tree
+Definition:
+
+A B+ Tree is an extension of the B-Tree, optimized for range queries and database indexing.
+It stores all actual data only in leaf nodes, while internal nodes store only keys for navigation.
+
+
+Properties of B+ Tree:
+
+    1. All leaf nodes are linked sequentially (like a linked list).
+    2. Internal nodes don’t store actual data — only keys.
+    3. Searching is faster because leaf nodes form a continuous sequence.
+    4. Ideal for range-based searching (e.g., finding records between 10 and 50).
+
+
+
+Example Structure:
+             [30, 60]
+           /     |     \
+       [10,20] [40,50] [70,80]
+
+Leaf nodes linked:  [10,20] → [40,50] → [70,80]
+
+
+
+Difference Between B-Tree and B+ Tree:
+| Aspect          | B-Tree                                 | B+ Tree                               |
+| ----------------|--------------------------------------- | ----------------------------------------- |
+| Data storage    | Data stored in internal and leaf nodes | Data stored only in leaf nodes            |
+| Search speed    | Slower (more disk accesses)            | Faster (less disk access)                 |
+| Leaf connection | Not linked                             | All leaf nodes are linked                 |
+| Traversal       | Needs full tree traversal              | Sequential traversal possible             |
+| Use case        | General indexing                       | Database and file systems (range queries) |
+
+
+Applications of B+ Tree:
+
+    Used in database indexing (MySQL, Oracle)
+    File systems (NTFS, ReFS, EXT4)
+    Search engines for quick record lookup
+
+
+✅ In Simple Words:
+
+B-Tree = Fast for single searches, stores data everywhere.
+B+ Tree = Fast for range searches, stores data only in leaves.
+
+      `
+    },
+    {
       id: 1,
       question: "",
       answer: "",
       codeExample: ``
     },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+      codeExample: ``
+    },
+
     {
       id: 1,
       question: "",
