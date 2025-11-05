@@ -438,12 +438,9 @@ int main() {
     char c2 = '7';
     char c3 = '+';
 
-    printf("%c -> %d\\
-", c1, isalnum(c1));  // 'A' is alphanumeric → nonzero
-    printf("%c -> %d\\
-", c2, isalnum(c2));  // '7' is alphanumeric → nonzero
-    printf("%c -> %d\\
-", c3, isalnum(c3));  // '+' is NOT alphanumeric → 0
+    printf("%c -> %d\\n", c1, isalnum(c1));  // 'A' is alphanumeric → nonzero
+    printf("%c -> %d\\n", c2, isalnum(c2));  // '7' is alphanumeric → nonzero
+    printf("%c -> %d\\n", c3, isalnum(c3));  // '+' is NOT alphanumeric → 0
 
     return 0;
 }
@@ -553,13 +550,11 @@ int front = -1, rear = -1;
 
 void enqueue(int x) {
     if (rear == SIZE - 1) {
-        printf("Queue Overflow\\
-");
+        printf("Queue Overflow\\n");
     } else {
         if (front == -1) front = 0; // first element
         queue[++rear] = x;
-        printf("%d enqueued to queue\\
-", x);
+        printf("%d enqueued to queue\\n", x);
     }
 }
 
@@ -567,11 +562,9 @@ void enqueue(int x) {
 
 void dequeue() {
     if (front == -1 || front > rear) {          you must be used this condition front > rear because after some dequeue operation front will be greater than rear
-        printf("Queue Underflow\\
-");
+        printf("Queue Underflow\\n");
     } else {
-        printf("%d dequeued from queue\\
-", queue[front++]);
+        printf("%d dequeued from queue\\n", queue[front++]);
     }
 }
 
@@ -580,11 +573,9 @@ void dequeue() {
 
 void dequeue() {
     if (front == -1 || front > rear) {            you can used front == rear condition so you don't need write this condition (front > rear)
-        printf("Queue Underflow\\
-");
+        printf("Queue Underflow\\n");
     } else {
-        printf("%d dequeued from queue\\
-", queue[front]);
+        printf("%d dequeued from queue\\n", queue[front]);
         if (front == rear) {
             // Last element removed → reset queue
             front = rear = -1;
@@ -597,14 +588,12 @@ void dequeue() {
 
 void display() {
     if (front == -1 || front > rear) {
-        printf("Queue is Empty\\
-");
+        printf("Queue is Empty\\n");
     } else {
         printf("Queue: ");
         for (int i = front; i <= rear; i++)
             printf("%d ", queue[i]);
-        printf("\\
-");
+        printf("\\n");
     }
 }
 
@@ -734,8 +723,7 @@ int front = -1, rear = -1;
 
 void enqueue(int x) {
     if ((front == 0 && rear == SIZE - 1) || (rear + 1 == front)) {
-        printf("Queue Overflow\\
-");
+        printf("Queue Overflow\\n");
     } else if (front == -1) {
         front = rear = 0;
         queue[rear] = x;
@@ -746,17 +734,14 @@ void enqueue(int x) {
         rear++;
         queue[rear] = x;
     }
-    printf("%d enqueued\\
-", x);
+    printf("%d enqueued\\n", x);
 }
 
 void dequeue() {
     if (front == -1) {
-        printf("Queue Underflow\\
-");
+        printf("Queue Underflow\\n");
     } else {
-        printf("%d dequeued\\
-", queue[front]);
+        printf("%d dequeued\\n", queue[front]);
         if (front == rear) {
             front = rear = -1;
         } else if (front == SIZE - 1) {
@@ -769,8 +754,7 @@ void dequeue() {
 
 void display() {
     if (front == -1) {
-        printf("Queue is Empty\\
-");
+        printf("Queue is Empty\\n");
         return;
     }
     printf("Queue: ");
@@ -783,8 +767,7 @@ void display() {
         for (int i = 0; i <= rear; i++)             It is used to display elements from start of array to rear (like print first part of array)
             printf("%d ", queue[i]);
     }
-    printf("\\
-");
+    printf("\\n");
 }
 
 int main() {
@@ -977,21 +960,18 @@ int front = -1, rear = -1;
 // Insert at rear
 void insertRear(int x) {
     if (rear == SIZE - 1) {
-        printf("Deque Overflow\\
-");
+        printf("Deque Overflow\\n");
         return;
     }
     if (front == -1) front = 0;  // first element
     deque[++rear] = x;
-    printf("%d inserted at rear\\
-", x);
+    printf("%d inserted at rear\\n", x);
 }
 
 // Insert at front
 void insertFront(int x) {
     if (front == 0) {
-        printf("No space at front\\
-");
+        printf("No space at front\\n");
         return;
     }
     if (front == -1) { // first element
@@ -1000,19 +980,16 @@ void insertFront(int x) {
         front--;
     }
     deque[front] = x;
-    printf("%d inserted at front\\
-", x);
+    printf("%d inserted at front\\n", x);
 }
 
 // Delete from front
 void deleteFront() {
     if (front == -1) {
-        printf("Deque Underflow\\
-");
+        printf("Deque Underflow\\n");
         return;
     }
-    printf("%d deleted from front\\
-", deque[front]);
+    printf("%d deleted from front\\n", deque[front]);
     if (front == rear) {
         front = rear = -1;
     } else {
@@ -1023,12 +1000,10 @@ void deleteFront() {
 // Delete from rear
 void deleteRear() {
     if (rear == -1) {
-        printf("Deque Underflow\\
-");
+        printf("Deque Underflow\\n");
         return;
     }
-    printf("%d deleted from rear\\
-", deque[rear]);
+    printf("%d deleted from rear\\n", deque[rear]);
     if (front == rear) {
         front = rear = -1;
     } else {
@@ -1039,16 +1014,14 @@ void deleteRear() {
 // Display
 void display() {
     if (front == -1) {
-        printf("Deque is empty\\
-");
+        printf("Deque is empty\\n");
         return;
     }
     printf("Deque: ");
     for (int i = front; i <= rear; i++) {
         printf("%d ", deque[i]);
     }
-    printf("\\
-");
+    printf("\\n");
 }
 
 int main() {
@@ -1245,8 +1218,7 @@ int isEmpty() {
 
 void insertFront(int x) {
     if (isFull()) {
-        printf("Deque Overflow\\
-");
+        printf("Deque Overflow\\n");
         return;
     }
     if (front == -1) {
@@ -1257,14 +1229,12 @@ void insertFront(int x) {
         front--;
     }
     deque[front] = x;
-    printf("%d inserted at front\\
-", x);
+    printf("%d inserted at front\\n", x);
 }
 
 void insertRear(int x) {
     if (isFull()) {
-        printf("Deque Overflow\\
-");
+        printf("Deque Overflow\\n");
         return;
     }
     if (front == -1) {
@@ -1275,18 +1245,15 @@ void insertRear(int x) {
         rear++;
     }
     deque[rear] = x;
-    printf("%d inserted at rear\\
-", x);
+    printf("%d inserted at rear\\n", x);
 }
 
 void deleteFront() {
     if (isEmpty()) {
-        printf("Deque Underflow\\
-");
+        printf("Deque Underflow\\n");
         return;
     }
-    printf("%d deleted from front\\
-", deque[front]);
+    printf("%d deleted from front\\n", deque[front]);
     if (front == rear) {
         front = rear = -1;
     } else if (front == SIZE - 1) {
@@ -1298,12 +1265,10 @@ void deleteFront() {
 
 void deleteRear() {
     if (isEmpty()) {
-        printf("Deque Underflow\\
-");
+        printf("Deque Underflow\\n");
         return;
     }
-    printf("%d deleted from rear\\
-", deque[rear]);
+    printf("%d deleted from rear\\n", deque[rear]);
     if (front == rear) {
         front = rear = -1;
     } else if (rear == 0) {
@@ -1315,8 +1280,7 @@ void deleteRear() {
 
 void display() {
     if (isEmpty()) {
-        printf("Deque is empty\\
-");
+        printf("Deque is empty\\n");
         return;
     }
     printf("Deque: ");
@@ -1326,8 +1290,7 @@ void display() {
         if (i == rear) break;
         i = (i + 1) % SIZE;
     }
-    printf("\\
-");
+    printf("\\n");
 }
 
 int main() {
@@ -1443,8 +1406,7 @@ int n = 0;       // current size
 // Function to insert element in priority queue
 void enqueue(int value) {
     if (n == SIZE) {
-        printf("Priority Queue Overflow\\
-");
+        printf("Priority Queue Overflow\\n");
         return;
     }
     int i = n - 1;
@@ -1455,19 +1417,16 @@ void enqueue(int value) {
     }
     pq[i + 1] = value;
     n++;
-    printf("%d inserted\\
-", value);
+    printf("%d inserted\\n", value);
 }
 
 // Function to remove element with highest priority (smallest value)
 void dequeue() {
     if (n == 0) {
-        printf("Priority Queue Underflow\\
-");
+        printf("Priority Queue Underflow\\n");
         return;
     }
-    printf("%d deleted (highest priority)\\
-", pq[0]);
+    printf("%d deleted (highest priority)\\n", pq[0]);
     for (int i = 0; i < n - 1; i++) {                          -> this for loop is used to shift left all elements after dequeue operation
         pq[i] = pq[i + 1];
     }
@@ -1477,16 +1436,14 @@ void dequeue() {
 // Display queue
 void display() {
     if (n == 0) {
-        printf("Priority Queue is Empty\\
-");
+        printf("Priority Queue is Empty\\n");
         return;
     }
     printf("Priority Queue: ");
     for (int i = 0; i < n; i++) {
         printf("%d ", pq[i]);
     }
-    printf("\\
-");
+    printf("\\n");
 }
 
 int main() {
@@ -1531,8 +1488,7 @@ Primitive Data Structures
 int main() {
     int age = 21;       // Primitive: int
     char grade = 'A';   // Primitive: char
-    printf("Age: %d, Grade: %c\\
-", age, grade);
+    printf("Age: %d, Grade: %c\\n", age, grade);
     return 0;
 }
 
@@ -1553,8 +1509,7 @@ Non-Primitive Data Structures
 #include <stdio.h>
 int main() {
     int arr[3] = {10, 20, 30};   // Non-Primitive: Array
-    printf("Array: %d %d %d\\
-", arr[0], arr[1], arr[2]);
+    printf("Array: %d %d %d\\n", arr[0], arr[1], arr[2]);
     return 0;
 }
 
@@ -1865,8 +1820,7 @@ void display() {
         printf("%d → ", temp->data);
         temp = temp->next;
     }
-    printf("NULL\\
-");
+    printf("NULL\\n");
 }
 
 int main() {
@@ -2281,8 +2235,7 @@ int main() {
     arr = (int*) malloc(n * sizeof(int));
 
     if (arr == NULL) {
-        printf("Memory not allocated!\\
-");
+        printf("Memory not allocated!\\n");
         return 1;
     }
 
@@ -2466,8 +2419,7 @@ void insertBeginning(int value) {
     newNode->data = value;
     newNode->next = head;
     head = newNode;
-    printf("%d inserted at beginning\\
-", value);
+    printf("%d inserted at beginning\\n", value);
 }
 
 // Insert at End
@@ -2485,8 +2437,7 @@ void insertEnd(int value) {
         }
         temp->next = newNode;
     }
-    printf("%d inserted at end\\
-", value);
+    printf("%d inserted at end\\n", value);
 }
 
 // Insert at Position
@@ -2497,8 +2448,7 @@ void insertPosition(int value, int pos) {
     if (pos == 1) {
         newNode->next = head;
         head = newNode;
-        printf("%d inserted at position %d\\
-", value, pos);
+        printf("%d inserted at position %d\\n", value, pos);
         return;
     }
 
@@ -2508,42 +2458,36 @@ void insertPosition(int value, int pos) {
     }
 
     if (temp == NULL) {
-        printf("Invalid Position!\\
-");
+        printf("Invalid Position!\\n");
         free(newNode);
         return;
     }
 
     newNode->next = temp->next;
     temp->next = newNode;
-    printf("%d inserted at position %d\\
-", value, pos);
+    printf("%d inserted at position %d\\n", value, pos);
 }
 
 // Delete from Beginning
 void deleteBeginning() {
     if (head == NULL) {
-        printf("List is Empty!\\
-");
+        printf("List is Empty!\\n");
         return;
     }
     struct Node* temp = head;
     head = head->next;
-    printf("%d deleted from beginning\\
-", temp->data);
+    printf("%d deleted from beginning\\n", temp->data);
     free(temp);
 }
 
 // Delete from End
 void deleteEnd() {
     if (head == NULL) {
-        printf("List is Empty!\\
-");
+        printf("List is Empty!\\n");
         return;
     }
     if (head->next == NULL) {
-        printf("%d deleted from end\\
-", head->data);
+        printf("%d deleted from end\\n", head->data);
         free(head);
         head = NULL;
         return;
@@ -2552,8 +2496,7 @@ void deleteEnd() {
     while (temp->next->next != NULL) {
         temp = temp->next;
     }
-    printf("%d deleted from end\\
-", temp->next->data);
+    printf("%d deleted from end\\n", temp->next->data);
     free(temp->next);
     temp->next = NULL;
 }
@@ -2561,15 +2504,13 @@ void deleteEnd() {
 // Delete from Position
 void deletePosition(int pos) {
     if (head == NULL) {
-        printf("List is Empty!\\
-");
+        printf("List is Empty!\\n");
         return;
     }
     if (pos == 1) {
         struct Node* temp = head;
         head = head->next;
-        printf("%d deleted from position %d\\
-", temp->data, pos);
+        printf("%d deleted from position %d\\n", temp->data, pos);
         free(temp);
         return;
     }
@@ -2580,15 +2521,13 @@ void deletePosition(int pos) {
     }
 
     if (temp == NULL || temp->next == NULL) {
-        printf("Invalid Position!\\
-");
+        printf("Invalid Position!\\n");
         return;
     }
 
     struct Node* del = temp->next;
     temp->next = del->next;
-    printf("%d deleted from position %d\\
-", del->data, pos);
+    printf("%d deleted from position %d\\n", del->data, pos);
     free(del);
 }
 
@@ -2596,8 +2535,7 @@ void deletePosition(int pos) {
 void display() {
     struct Node* temp = head;
     if (temp == NULL) {
-        printf("List is Empty!\\
-");
+        printf("List is Empty!\\n");
         return;
     }
     printf("Linked List: ");
@@ -2605,8 +2543,7 @@ void display() {
         printf("%d → ", temp->data);
         temp = temp->next;
     }
-    printf("NULL\\
-");
+    printf("NULL\\n");
 }
 
 // Main Function
@@ -2775,8 +2712,7 @@ void insertBeginning(int value) {
         head->prev = newNode;
 
     head = newNode;
-    printf("%d inserted at beginning\\
-", value);
+    printf("%d inserted at beginning\\n", value);
 }
 
 // Insert at End
@@ -2788,8 +2724,7 @@ void insertEnd(int value) {
     if (head == NULL) {
         newNode->prev = NULL;
         head = newNode;
-        printf("%d inserted at end\\
-", value);
+        printf("%d inserted at end\\n", value);
         return;
     }
 
@@ -2800,8 +2735,7 @@ void insertEnd(int value) {
 
     temp->next = newNode;
     newNode->prev = temp;
-    printf("%d inserted at end\\
-", value);
+    printf("%d inserted at end\\n", value);
 }
 
 // Insert at Specific Position
@@ -2815,8 +2749,7 @@ void insertPosition(int value, int pos) {
         if (head != NULL)
             head->prev = newNode;               // old head points back to new node
         head = newNode;
-        printf("%d inserted at position %d\\
-", value, pos);
+        printf("%d inserted at position %d\\n", value, pos);
         return;
     }
 
@@ -2826,8 +2759,7 @@ void insertPosition(int value, int pos) {
     }
 
     if (temp == NULL) {
-        printf("Invalid Position!\\
-");
+        printf("Invalid Position!\\n");
         free(newNode);
         return;
     }
@@ -2839,15 +2771,13 @@ void insertPosition(int value, int pos) {
         temp->next->prev = newNode;
 
     temp->next = newNode;
-    printf("%d inserted at position %d\\
-", value, pos);
+    printf("%d inserted at position %d\\n", value, pos);
 }
 
 // Delete from Beginning
 void deleteBeginning() {
     if (head == NULL) {
-        printf("List is Empty!\\
-");
+        printf("List is Empty!\\n");
         return;
     }
     struct Node* temp = head;
@@ -2856,24 +2786,21 @@ void deleteBeginning() {
     if (head != NULL)
         head->prev = NULL;
 
-    printf("%d deleted from beginning\\
-", temp->data);
+    printf("%d deleted from beginning\\n", temp->data);
     free(temp);
 }
 
 // Delete from End
 void deleteEnd() {
     if (head == NULL) {
-        printf("List is Empty!\\
-");
+        printf("List is Empty!\\n");
         return;
     }
 
     struct Node* temp = head;
 
     if (head->next == NULL) {
-        printf("%d deleted from end\\
-", head->data);
+        printf("%d deleted from end\\n", head->data);
         free(head);
         head = NULL;
         return;
@@ -2883,8 +2810,7 @@ void deleteEnd() {
         temp = temp->next;
     }
 
-    printf("%d deleted from end\\
-", temp->data);
+    printf("%d deleted from end\\n", temp->data);
     temp->prev->next = NULL;
     free(temp);
 }
@@ -2892,8 +2818,7 @@ void deleteEnd() {
 // Delete from Specific Position
 void deletePosition(int pos) {
     if (head == NULL) {
-        printf("List is Empty!\\
-");
+        printf("List is Empty!\\n");
         return;
     }
 
@@ -2903,8 +2828,7 @@ void deletePosition(int pos) {
         head = head->next;
         if (head != NULL)
             head->prev = NULL;
-        printf("%d deleted from position %d\\
-", temp->data, pos);
+        printf("%d deleted from position %d\\n", temp->data, pos);
         free(temp);
         return;
     }
@@ -2914,8 +2838,7 @@ void deletePosition(int pos) {
     }
 
     if (temp == NULL) {
-        printf("Invalid Position!\\
-");
+        printf("Invalid Position!\\n");
         return;
     }
 
@@ -2925,8 +2848,7 @@ void deletePosition(int pos) {
     if (temp->next != NULL)
         temp->next->prev = temp->prev;
 
-    printf("%d deleted from position %d\\
-", temp->data, pos);
+    printf("%d deleted from position %d\\n", temp->data, pos);
     free(temp);
 }
 
@@ -2934,8 +2856,7 @@ void deletePosition(int pos) {
 void displayForward() {
     struct Node* temp = head;
     if (temp == NULL) {
-        printf("List is Empty!\\
-");
+        printf("List is Empty!\\n");
         return;
     }
     printf("Forward: ");
@@ -2943,15 +2864,13 @@ void displayForward() {
         printf("%d ↔ ", temp->data);
         temp = temp->next;
     }
-    printf("NULL\\
-");
+    printf("NULL\\n");
 }
 
 // Display Backward
 void displayBackward() {
     if (head == NULL) {
-        printf("List is Empty!\\
-");
+        printf("List is Empty!\\n");
         return;
     }
     struct Node* temp = head;
@@ -2964,8 +2883,7 @@ void displayBackward() {
         printf("%d ↔ ", temp->data);
         temp = temp->prev;
     }
-    printf("NULL\\
-");
+    printf("NULL\\n");
 }
 
 // Main Function
@@ -3346,8 +3264,7 @@ void deleteAtPosition(int pos) {
 // Display Circular Linked List
 void display() {
     if (head == NULL) {
-        printf("List is empty\\
-");
+        printf("List is empty\\n");
         return;
     }
     struct Node* temp = head;
@@ -3355,8 +3272,7 @@ void display() {
         printf("%d → ", temp->data);
         temp = temp->next;
     } while (temp != head);
-    printf("(back to head)\\
-");
+    printf("(back to head)\\n");
 }
 
 // Main Function
