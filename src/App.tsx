@@ -15,7 +15,7 @@ function App() {
     {
       id: 1,
       question: "1. What is a Stack?",
-      answer: "A stack is a linear data structure that follows the LIFO (Last In, First Out) principle. Elements can be added or removed only from the top of the stack. \\n\tLast element inserted → first to be removed. \\n\tThink of a stack of books or plates.",
+      answer: "A stack is a linear data structure that follows the LIFO (Last In, First Out) principle. Elements can be added or removed only from the top of the stack. \\n\\tLast element inserted → first to be removed. \\n\\tThink of a stack of books or plates.",
       codeExample: `
 
 📌 Real-life Applications of Stack
@@ -176,7 +176,7 @@ Human/Developer view → If we use it with stack rules → we conceptually say i
     {
       id: 2,
       question: "2. Infix to Postfix using Stack.",
-      answer: "Infix Expression → Operator between operands. \\n\tExample: A + B , (A + B) * C \\n\\nPostfix Expression (Reverse Polish Notation, RPN) → Operator comes after operands. \\n\tExample: A B + , A B + C *",
+      answer: "Infix Expression → Operator between operands. \\n\\tExample: A + B , (A + B) * C \\n\\nPostfix Expression (Reverse Polish Notation, RPN) → Operator comes after operands. \\n\\tExample: A B + , A B + C *",
       codeExample: `
 🔹 Example
 
@@ -306,7 +306,7 @@ void infixToPostfix(char* exp) {
     while (top != -1)
         result[k++] = pop();
 
-    result[k] = '\0';                  '\0' -> Marks the end of a C string
+    result[k] = '\\0';                  '\\0' -> Marks the end of a C string
     printf("Postfix: %s\\n", result);
 }
 
@@ -360,7 +360,7 @@ void infixToPrefix(char* exp) {
     while (top != -1)
         result[k++] = pop();
 
-    result[k] = '\0';                   '\0' -> Marks the end of a C string
+    result[k] = '\\0';                   '\\0' -> Marks the end of a C string
 
     // Step 4: Reverse the result to get prefix
     reverse(result);
@@ -475,7 +475,7 @@ top++ → use first, then increase.
     {
       id: 3,
       question: "3. What is a Queue?",
-      answer: "A queue is a linear data structure that follows the FIFO (First In, First Out) principle. Elements are added at the rear (end) and removed from the front (beginning). \\n\tFirst element inserted → first to be removed. \\n\tThink of a line of people waiting. \\n\tThe first person in line is the first to get the ticket and leave.",
+      answer: "A queue is a linear data structure that follows the FIFO (First In, First Out) principle. Elements are added at the rear (end) and removed from the front (beginning). \\n\\tFirst element inserted → first to be removed. \\n\\tThink of a line of people waiting. \\n\\tThe first person in line is the first to get the ticket and leave.",
       codeExample: `
 🔹 Basic Operations in Queue
 
@@ -2486,11 +2486,11 @@ void insertPosition(int value, int pos) {
     }
 
     struct Node* temp = head;
-    for (int i = 1; i < pos - 1 && temp != NULL; i++) {
-        temp = temp->next;
+    for (int i = 1; i < pos - 1 && temp != NULL; i++) {          \\ and you enter position 3 your loop is run one time 
+        temp = temp->next;  
     }
 
-    if (temp == NULL) {
+    if (temp == NULL) {                                  \\like you have 2 node you enter 4 so temp is null
         printf("Invalid Position!\\n");
         free(newNode);
         return;
@@ -2519,7 +2519,7 @@ void deleteEnd() {
         printf("List is Empty!\\n");
         return;
     }
-    if (head->next == NULL) {
+    if (head->next == NULL) {   
         printf("%d deleted from end\\n", head->data);
         free(head);
         head = NULL;
@@ -2530,8 +2530,8 @@ void deleteEnd() {
         temp = temp->next;
     }
     printf("%d deleted from end\\n", temp->next->data);
-    free(temp->next);
-    temp->next = NULL;
+    free(temp->next);                                     // delete last node like temp->next is 300 so free(300)
+    temp->next = NULL;                                    // adter deleting last node set second last node next to null like temp->next = 300 t0 temp->next = null
 }
 
 // Delete from Position
@@ -3498,9 +3498,9 @@ It looks like an upside-down tree with one root and many branches.
 🔹 Example:
 
           A          ← Root
-         / \
+         / \\
         B   C        ← Children
-       / \   \
+       / \\   \\
       D   E   F      ← Leaf Nodes
 
 
@@ -3568,9 +3568,9 @@ To access all nodes, we use traversal methods:
 🔹 Example (Binary Tree Traversal)
 
       A
-     / \
+     / \\
     B   C
-   / \
+   / \\
   D   E
 
 
@@ -3607,9 +3607,9 @@ There is one special node called the root node, and all other nodes are connecte
 🧩 Structure of a General Tree:
 
            A
-        /  |  \
+        /  |  \\
        B   C   D
-          / \
+          / \\
          E   F
 
 Explanation:
@@ -3682,9 +3682,9 @@ usually referred to as the left child and the right child.
 🧠 Structure of a Binary Tree:
 
         A
-       / \
+       / \\
       B   C
-     / \
+     / \\
     D   E
 
 
@@ -3778,9 +3778,9 @@ The last level may not be full, but all its nodes appear as left as possible.
 
 🧠 Example 1: Complete Binary Tree
         1
-       / \
+       / \\
       2   3
-     / \  /
+     / \\  /
     4  5 6
 
 
@@ -3794,9 +3794,9 @@ The last level may not be full, but all its nodes appear as left as possible.
 ❌ Example 2: Not Complete
 
         1
-       / \
+       / \\
       2   3
-       \   \
+       \\   \\
         5   6
 
 ❌ Why not complete:
@@ -3846,9 +3846,9 @@ A Binary Search Tree (BST) is a special type of Binary Tree where:
 🧠 Example of a BST
 
         50
-       /  \
+       /  \\
      30    70
-    / \    / \
+    / \\    / \\
    20 40  60 80
 
 
@@ -3862,7 +3862,7 @@ And this rule applies to every subtree.
 
 ❌ Not a BST Example
         50
-       /  \
+       /  \\
      70    30
 
 
@@ -4032,9 +4032,9 @@ A Full Binary Tree (also called a Proper or Strict Binary Tree) is a binary tree
 
 🧠 Example of a Full Binary Tree
         1
-       / \
+       / \\
       2   3
-     / \ / \
+     / \\ / \\
     4  5 6  7
 
 
@@ -4050,9 +4050,9 @@ Hence, all nodes have either 0 or 2 children.
 
 ❌ Not a Full Binary Tree Example
         1
-       / \
+       / \\
       2   3
-       \
+       \\
         4
 
 
@@ -4170,7 +4170,7 @@ For each node:
 🌿 Example of an AVL Tree
 
         30
-       /  \
+       /  \\
      20    40
     /
    10
@@ -4224,7 +4224,7 @@ Unbalanced:
 
 After Right Rotation:
         20
-       /  \
+       /  \\
      10    30
 
 
@@ -4233,14 +4233,14 @@ After Right Rotation:
 
 Unbalanced:
       10
-        \
+        \\
          20
-           \
+           \\
             30
 
 After Left Rotation:
         20
-       /  \
+       /  \\
      10    30
 
 
@@ -4251,12 +4251,12 @@ Unbalanced:
         30
        /
       10
-        \
+        \\
          20
 
 After LR Rotation:
         20
-       /  \
+       /  \\
      10    30
 
 
@@ -4265,14 +4265,14 @@ After LR Rotation:
 
 Unbalanced:
       10
-        \
+        \\
          30
         /
       20
 
 After RL Rotation:
         20
-       /  \
+       /  \\
      10    30
 
 
@@ -4459,7 +4459,7 @@ Properties of B-Tree:
 Example Structure:
 
              [30]
-           /     \
+           /     \\
        [10,20]   [40,50,60]
 
 
@@ -4501,7 +4501,7 @@ Properties of B+ Tree:
 
 Example Structure:
              [30, 60]
-           /     |     \
+           /     |     \\
        [10,20] [40,50] [70,80]
 
 Leaf nodes linked:  [10,20] → [40,50] → [70,80]
@@ -4539,10 +4539,315 @@ B+ Tree = Fast for range searches, stores data only in leaves.
       codeExample: ``
     },
     {
-      id: 1,
-      question: "",
+      id: 8888,
+      question: "Mid exam paper questions and answers",
       answer: "",
-      codeExample: ``
+      codeExample: `
+✅ Q1 (a) Short Questions – 1 mark each
+
+
+i) Define a primitive data structure.
+
+    Primitive data structures are basic data types provided by the programming language.
+    Examples: int, float, char, double, boolean.
+
+
+ii) What is a stack overflow?
+
+    Stack overflow happens when you try to push (add) elements into a stack that is already full.
+
+
+iii) Give one real-life example of a queue.
+
+    People standing in a line at a ticket counter
+    Vehicles in a toll booth line
+
+
+--------------------
+
+
+✅ Q1 (b) MCQs / True-False / Fill in the blanks
+
+1) A stack follows ____ order.
+👉 LIFO (Last In First Out)
+
+
+2) True or False: A binary tree can have more than two children.
+👉 False
+(Binary tree = maximum 2 children only.)
+
+
+3) In a singly linked list, the last node points to:
+👉 a) NULL
+
+
+4) A circular queue helps in problem of a simple queue —
+👉 Wastage of space
+(Circular queue reuses empty spaces.)
+
+
+5) A sparse matrix is one in which:
+👉 a) Most elements are zeros
+
+
+6) Which of the following is NOT a linear data structure?
+👉 d) Tree
+
+
+7) If A, B, C, D are inserted in queue & removed one by one → order?
+👉 A B C D
+(First in → First out)
+Correct option: A
+
+
+-------------------------------------------------------------------------------
+      
+
+✅ Q2 (a) 2-Mark Questions
+
+1) Define an array. Explain advantages and disadvantages.
+Array:
+
+A collection of similar elements stored at contiguous memory locations.
+
+Example: int arr[5];
+
+
+Advantages:
+
+Easy to access using index
+Fast searching
+Continuous memory improves performance
+
+Disadvantages:
+
+Fixed size
+Insertion/deletion difficult
+Wastage of memory if size unused
+
+
+
+2) What is Linked List? Give its types.
+
+A linked list is a dynamic data structure where elements (nodes) are connected using pointers.
+
+Types:
+
+Singly Linked List
+Doubly Linked List
+Circular Linked List
+Circular Doubly Linked List
+
+
+--------------------
+
+
+✅ Q2 (b) 3-Mark Questions
+
+1) Differentiate Stack and Queue
+
+| Stack                        | Queue                             |
+| ---------------------------- | --------------------------------- |
+| Follows LIFO                 | Follows FIFO                      |
+| Only top element accessible  | Insert at rear, delete from front |
+| push(), pop() operations     | enqueue(), dequeue() operations   |
+| Example: Browser back button | Example: Ticket line              |
+
+
+
+2) Discuss types of Binary Trees with examples.
+
+1. Full Binary Tree
+Every node has 0 or 2 children.
+
+2. Complete Binary Tree
+All levels are full except last, filled left to right.
+
+3. Perfect Binary Tree
+All internal nodes have two children & all leaves at same level.
+
+4. Skewed Binary Tree
+Every node has only left or only right child.
+
+5. Balanced Binary Tree
+Difference between left & right subtree height ≤ 1.
+
+
+-------------------------------------------------------------------------------
+
+
+✅ Q3 (Attempt Any TWO)
+
+Q3(i) Operations on Stack + Algorithms
+
+Operations:
+
+push()
+pop()
+peek()
+isEmpty()
+isFull()
+
+
+
+Algorithm: PUSH(x)
+
+if top == MAX-1
+    print "Overflow"
+else
+    top = top + 1
+    stack[top] = x
+
+
+
+Algorithm: POP
+
+if top == -1
+    print "Underflow"
+else
+    x = stack[top]
+    top = top - 1
+    return x
+
+
+Q3(ii) Static vs Dynamic Memory Allocation
+
+| Static                       | Dynamic                         |
+| ---------------------------- | ------------------------------- |
+| Memory fixed at compile time | Memory allocated at runtime     |
+| Uses array                   | Uses linked list, malloc(), new |
+| Fast access                  | Flexible size                   |
+| Wastage of memory possible   | No wastage, grows as needed     |
+| Used when size known         | Used when size unknown          |
+
+
+
+Q3(iii) Draw 4-node Singly Linked List + Insert at End
+
+Initial List (4 nodes)
+    [10] -> [20] -> [30] -> [40] -> NULL
+
+Insert 50 at end
+
+Steps:
+
+    Create new node = 50
+    Traverse to last node (40)
+    Point last node's next to new node
+    New node next = NULL
+
+Final List
+    [10] -> [20] -> [30] -> [40] -> [50] -> NULL
+
+
+-------------------------------------------------------------------------------
+
+
+✅ Q4 – 5 Marks
+
+Q4(a) Find Inorder, Preorder & Postorder order traversal of below Tree:
+
+                A
+             /     \\
+           B         C
+         /   \\     /   \\
+        D     F   G     H
+      /   \\         \\
+     I     J         K
+
+
+| Traversal Type | Answer                  |
+| -------------- | ----------------------- |
+| Preorder       | A B D I J F C G K H     |
+| Inorder        | I D J B F A G K C H     |
+| Postorder      | I J D F B K G H C A     |
+
+
+
+
+(b) Algorithm + Program to Insert Element in Simple Queue (Array Implementation)
+
+ALGORITHM: ENQUEUE (Insert Element)
+
+
+1. If rear == MAX - 1
+      Print "Queue Overflow"
+2. Else
+      If front == -1
+            front ← 0
+      rear ← rear + 1
+      queue[rear] ← element
+3. EndIf
+
+
+
+C PROGRAM (Array Implementation of Queue Insert / Enqueue)
+
+#include <stdio.h>
+
+#define MAX 50
+
+int queue[MAX];
+int front = -1, rear = -1;
+
+void enqueue(int x) {
+    if (rear == MAX - 1) {
+        printf("Queue Overflow\n");
+    } else {
+        if (front == -1)
+            front = 0;  // first element being inserted
+        
+        rear = rear + 1;
+        queue[rear] = x;
+        printf("%d inserted into queue\n", x);
+    }
+}
+
+int main() {
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+
+    return 0;
+}
+
+
+
+OR 
+(b) Sparse Matrix – Representation
+
+Given 5×6 matrix:
+
+0 0 0 0 9 0
+0 8 0 0 0 0
+4 0 0 2 0 0
+0 0 0 0 0 5
+0 0 2 0 0 0
+
+
+Non-zero elements:
+
+| Row | Col | Value |
+| --- | --- | ----- |
+| 0   | 4   | 9     |
+| 1   | 1   | 8     |
+| 2   | 0   | 4     |
+| 2   | 3   | 2     |
+| 3   | 5   | 5     |
+| 4   | 2   | 2     |
+
+
+✔ Triplet Representation:
+
+[5 6 6]     ← rows, columns, non-zero count
+[0 4 9]
+[1 1 8]
+[2 0 4]
+[2 3 2]
+[3 5 5]
+[4 2 2]
+
+`
     },
 
     {
@@ -4552,11 +4857,2515 @@ B+ Tree = Fast for range searches, stores data only in leaves.
       codeExample: ``
     },
     {
+      id: 21,
+      question: "21. Define Graph. Explain types of graphs.",
+      answer: "",
+      codeExample: `
+Define Graph
+
+A graph is a non-linear data structure made of:
+
+    Vertices (nodes) → points
+    Edges → lines that connect two vertices
+
+A graph is written as:
+👉 G = (V, E)
+
+where
+
+    V = set of vertices
+    E = set of edges
+
+Example:
+If V = {1,2,3} and E = {(1,2), (2,3)}, this means 1 is connected to 2, and 2 is connected to 3.
+      
+
+Types of Graphs
+
+1. Undirected Graph
+
+Edges have no direction.
+Connection is two-way.
+
+If (A, B) exists → A is connected to B and B is connected to A.
+
+Example:
+A — B (both ways)
+
+Diagram
+
+1 --- 2
+ \\   /
+   3
+
+Explanation
+    Edge 1–2 means both 1 connects to 2 and 2 connects to 1.
+
+
+
+2. Directed Graph (Digraph)
+
+Edges have direction (→).
+Shows one-way connection.
+
+Example:
+A → B (only from A to B)
+
+Diagram
+
+1 → 2 → 3
+↑       |
+|_______|
+
+Explanation
+    Arrows tell which direction the connection goes.
+
+
+
+3. Weighted Graph
+
+Each edge has a weight/value such as distance, cost, or time.
+Edge is written as (u, v, w)
+where w = weight.
+
+Example:
+A —5→ B (cost = 5)
+
+Diagram
+
+ (5)
+1 ----- 2
+  \\     |
+ (3)\\   |(2)
+      \\ |
+        3
+
+Explanation
+    Weight between 1 and 2 is 5
+    Weight between 2 and 3 is 2
+    Weight between 1 and 3 is 3
+
+
+
+4. Cyclic Graph
+
+A graph that has at least one cycle (a path that starts and ends at the same vertex).
+
+Example cycle:
+A → B → C → A
+
+Diagram
+
+A → B → C
+↑       ↓
+|_______|
+
+Explanation
+    A → B → C → A forms a cycle.
+      `
+    },
+    {
+      id: 22,
+      question: "22.Explain Adjacency Matrix with example.",
+      answer: "",
+      codeExample: `
+Adjacency Matrix (Easy Explanation)
+
+An Adjacency Matrix is a 2D table (matrix) used to represent a graph.
+
+Rows represent vertices
+Columns represent vertices
+Each cell contains either:
+    1 → if there is an edge between vertices
+    0 → if there is NO edge
+So, it shows which vertex is connected to which.
+
+Example Graph
+
+Let’s take a simple undirected graph:
+
+1 --- 2
+|     |
+|     |
+3 --- 4
+
+
+Edges:
+(1,2), (1,3), (2,4), (3,4)
+
+Adjacency Matrix for this Graph
+Vertices = {1, 2, 3, 4}
+
+Matrix:
+
+      1  2  3  4
+    -------------
+1 |  0  1  1  0
+2 |  1  0  0  1
+3 |  1  0  0  1
+4 |  0  1  1  0
+
+
+Explanation of Matrix
+    Row = starting vertex
+    Column = ending vertex
+
+Examples:
+
+Row 1, Column 2 = 1 → means 1 is connected to 2
+Row 1, Column 4 = 0 → means 1 is NOT connected to 4
+Because the graph is undirected, the matrix is symmetric.
+
+
+Weighted Graph Example (Bonus)
+
+If the edges have weights:
+
+      (5)
+   1 ------ 2
+   |        |
+ (3)      (2)
+   |        |
+   3 ------/
+
+
+
+Adjacency Matrix:
+
+      1  2  3
+    -----------
+1 |  0  5  3
+2 |  5  0  2
+3 |  3  2  0
+      
+      
+      `
+    },
+    {
+      id: 23,
+      question: "23. Explain Adjacency List with example.",
+      answer: "",
+      codeExample: `
+Adjacency List (Easy Explanation)
+
+An Adjacency List is another way to represent a graph.
+For each vertex, we store a list of all the vertices directly connected (adjacent) to it.
+It is usually stored using:
+    Array + Linked List
+    Array of lists
+It saves memory because it only stores the actual connections.
+
+Example Graph
+
+1 --- 2
+|     |
+|     |
+3 --- 4
+
+Edges:
+(1,2), (1,3), (2,4), (3,4)
+
+
+Adjacency List of this Graph
+For each vertex, list its neighbors:
+
+1 → 2 → 3
+2 → 1 → 4
+3 → 1 → 4
+4 → 2 → 3
+
+Explanation
+
+Node 1 is connected to 2 and 3 → so list is: 1 → 2 → 3
+Node 2 is connected to 1 and 4 → 2 → 1 → 4
+Node 3 is connected to 1 and 4 → 3 → 1 → 4
+Node 4 is connected to 2 and 3 → 4 → 2 → 3
+
+This is exactly how adjacency list works.
+
+
+
+Another Example (Directed Graph)
+
+Graph:
+
+1 → 2 → 3
+↑       |
+|_______|
+
+
+Adjacency List:
+
+1 → 2
+2 → 3
+3 → 1
+
+
+Because direction matters, we only list outgoing edges.
+      
+      `
+    },
+    {
+      id: 24,
+      question: "24. Write BFS algorithm with example.",
+      answer: "",
+      codeExample: `
+✅ BFS (Breadth-First Search) Algorithm
+
+BFS is a graph traversal method where we visit all neighbors first, then move to the next level.
+
+It uses a Queue (FIFO → First In First Out).
+
+✅ BFS Algorithm (Step-by-step)
+BFS(G, start_vertex):
+
+1. Create an empty queue.
+2. Mark all vertices as NOT visited.
+3. Enqueue the start_vertex into the queue.
+4. Mark start_vertex as visited.
+
+5. While queue is NOT empty:
+       a. Dequeue a vertex → call it current
+       b. Visit (process) current
+       c. For each neighbor of current:
+             If neighbor is NOT visited:
+                 Mark neighbor as visited
+                 Enqueue neighbor
+
+
+Very easy:
+👉 Put starting node in queue → visit → add neighbors → continue.
+
+✅ Example Graph
+0 --- 1
+| \\   |
+|  \\  |
+3     2
+
+
+Edges: (0,1), (0,2), (0,3), (1,2)
+
+✅ Step-by-Step BFS from vertex 0
+
+Step 1: Start at 0
+Queue: [0]
+Visited: {0}
+
+
+Step 2: Remove 0 → visit neighbors (1,2,3)
+Queue: [1, 2, 3]
+Visited: {0,1,2,3}
+
+
+Step 3: Remove 1 → visit neighbors (0,2)
+(0 & 2 already visited → ignore)
+Queue: [2, 3]
+
+
+Step 4: Remove 2 → neighbors (0,1)
+(both visited)
+Queue: [3]
+
+
+Step 5: Remove 3 → neighbors (0)
+(already visited)
+Queue: []
+
+
+⏳ Queue empty → BFS Complete
+
+✅ Final BFS Order
+0 → 1 → 2 → 3
+
+
+✅ ASCII Visualization of BFS Levels
+
+Level 0:      0
+             /|\\
+            1 2 3
+
+BFS visits like:
+0 → (1,2,3) → then no more new nodes
+
+
+-------------------------
+
+
+✅ More Difficult Example Graph (ASCII Diagram)
+
+      0
+    / | \\
+   1  2  3
+  / \\ |   \\
+ 4   5     6
+      \\   /
+        7
+
+Edges
+
+(0,1), (0,2), (0,3)
+(1,4), (1,5)
+(2,5)
+(3,6)
+(5,7)
+(6,7)
+
+
+⭐ We will perform BFS starting from vertex 0
+
+✅ Step-by-Step BFS from vertex 0
+
+Step 1: Start at 0
+Queue: [0]
+Visited: {0}
+
+
+Step 2: Remove 0 → visit neighbors (1,2,3)
+Queue: [1, 2, 3]
+Visited: {0,1,2,3}
+
+
+Step 3: Remove 1 → visit neighbors (4,5)
+(0 already visited, ignore)
+Queue: [2, 3, 4, 5]
+Visited: {0,1,2,3,4,5}
+
+
+Step 4: Remove 2 → visit neighbor (5)
+(5 already visited from previous step, ignore)
+Queue: [3, 4, 5]
+
+
+Step 5: Remove 3 → visit neighbor (6)
+Queue: [4, 5, 6]
+Visited: {0,1,2,3,4,5,6}
+
+
+Step 6: Remove 4 → no new neighbors
+(Only neighbor was 1, already visited)
+Queue: [5, 6]
+
+
+Step 7: Remove 5 → visit neighbor (7)
+Queue: [6, 7]
+Visited: {0,1,2,3,4,5,6,7}
+
+
+Step 8: Remove 6 → visit neighbor (7)
+(7 already visited → ignore)
+Queue: [7]
+
+
+Step 9: Remove 7 → no new neighbors
+Queue: []
+⏳ Queue empty → BFS complete.
+
+
+⭐ Final BFS Order
+0 → 1 → 2 → 3 → 4 → 5 → 6 → 7
+
+
+✅ ASCII Visualization of BFS Levels
+
+Level 0:        0
+              / | \\
+Level 1:     1  2  3
+            / \\ |   \\
+Level 2:   4    5     6
+                   \\ /
+Level 3:            7
+
+
+BFS visits level-wise:
+
+0
+→ (1, 2, 3)
+→ (4, 5, 6)
+→ (7)
+
+
+
+So the BFS traversal is:
+👉 0 → 1 → 2 → 3 → 4 → 5 → 6 → 7
+      
+      `
+    },
+    {
+      id: 25,
+      question: "25. Write DFS algorithm with example.",
+      answer: "",
+      codeExample: `
+✅ DFS (Depth-First Search) Algorithm
+
+DFS explores a graph by going deep into one path before backtracking.
+
+It uses a Stack (LIFO → Last In First Out) or recursion.
+
+✅ DFS Algorithm (Step-by-step)
+DFS(G, start_vertex):
+
+1. Mark all vertices as NOT visited.
+2. Push start_vertex onto stack.
+3. Mark start_vertex as visited.
+
+4. While stack is NOT empty:
+       a. Pop the top element → call it current
+       b. Visit (process) current
+       c. For each neighbor of current:
+             If neighbor is NOT visited:
+                 Mark neighbor as visited
+                 Push neighbor onto stack
+
+
+Easy meaning →
+👉 Go deep… deep… deep, until no way → then backtrack.
+
+⭐ Example Graph (ASCII Diagram)
+0 --- 1
+| \\   |
+|  \\  |
+3     2
+
+
+Edges:
+(0,1), (0,2), (0,3), (1,2)
+
+We will perform DFS starting from 0
+
+✅ Step-by-Step DFS from vertex 0
+
+Step 1: Start at 0
+Stack: [0]
+Visited: {0}
+
+Pop 0 → visit it.
+
+
+Step 2: From 0 → push neighbors (1,2,3)
+(DFS pushes in order, but visits the last pushed first)
+Stack: [1, 2, 3]
+Visited: {0,1,2,3}
+
+
+Step 3: Pop 3
+Stack: [1, 2]
+    3 has neighbor 0 → already visited
+    So nothing new is added.
+
+
+Step 4: Pop 2
+Stack: [1]
+Neighbors → (0,1)
+Both visited → ignore
+
+
+Step 5: Pop 1
+Stack: []
+    Neighbors → (0,2)
+    Both visited → nothing to add
+
+⏳ Stack empty → DFS complete
+
+
+⭐ Final DFS Order
+0 → 3 → 2 → 1
+
+Remember:
+DFS depends on the order of pushing neighbors, but the idea is:
+👉 Go deep first, then backtrack.
+
+
+⭐ ASCII Visualization of DFS Path
+
+     0
+   / | \\
+  1  2  3
+
+DFS goes like:
+0 → 3 → backtrack → 2 → backtrack → 1
+
+
+-------------------------
+
+
+⭐ Difficult DFS Example Graph (ASCII Diagram)
+        0
+      / | \\
+     1  2  3
+    / \\ |   \\
+   4   5     6
+        \\   /
+          7
+
+Edges
+
+(0,1), (0,2), (0,3)
+(1,4), (1,5)
+(2,5)
+(3,6)
+(5,7)
+(6,7)
+
+We perform DFS starting from vertex 0.
+We will visit neighbors from left to right for consistency.
+
+
+⭐ DFS Step-by-Step
+
+Initialize
+
+Stack: [0]
+Visited: {0}
+
+Pop 0 → visit it.
+
+
+
+Step 1: Visit 0
+
+Neighbors → 1, 2, 3
+Push in order → 1, 2, 3
+Stack (top at right):
+[1, 2, 3]
+Visited: {0,1,2,3}
+
+
+Step 2: Pop 3
+
+Stack: [1, 2]
+Visit 3 → neighbor = 6
+(0 already visited)
+
+Push 6
+Stack: [1, 2, 6]
+Visited: {0,1,2,3,6}
+
+
+Step 3: Pop 6
+
+Stack: [1, 2]
+Visit 6 → neighbor = 7
+(3 already visited)
+
+Push 7
+Stack: [1, 2, 7]
+Visited: {0,1,2,3,6,7}
+
+
+Step 4: Pop 7
+
+Stack: [1, 2]
+Visit 7 → neighbor = 5
+(6 already visited)
+
+Push 5
+Stack: [1, 2, 5]
+Visited: {0,1,2,3,5,6,7}
+
+
+Step 5: Pop 5
+
+Stack: [1, 2]
+Visit 5 → neighbors = 1,2,7
+(All visited → add nothing)
+
+
+Step 6: Pop 2
+
+Stack: [1]
+Visit 2 → neighbor = 5
+(5 already visited)
+
+
+Step 7: Pop 1
+
+Stack: []
+Visit 1 → neighbors = 4,5
+Push 4 (5 already visited)
+
+Stack: [4]
+Visited: {0,1,2,3,4,5,6,7}
+
+
+Step 8: Pop 4
+Stack: []
+Visit 4 → neighbor = 1 (already visited)
+
+
+⏳ Stack empty → DFS complete.
+
+
+⭐ Final DFS Order
+0 → 3 → 6 → 7 → 5 → 2 → 1 → 4
+
+
+⭐ DFS Traversal Path ASCII
+
+Start at 0
+↓
+Go deep through 3 → 6 → 7 → 5
+(backtrack)
+Then go to 2
+(backtrack)
+Then go to 1 → 4
+(backtrack)
+Done
+
+
+Note:
+    like you asked Visited set stores is same in BFS and DFS - Yes
+      
+      `
+    },
+    {
+      id: 26,
+      question: "26. Explain Graph Terminology.",
+      answer: "",
+      codeExample: `
+⭐ 1. Graph
+
+A graph has vertices (nodes) and edges (connections).
+
+A ----- B
+ \\     /
+   \\ /
+    C
+
+Vertices: A, B, C
+Edges: (A,B), (B,C), (A,C)
+
+
+⭐ 2. Vertex (Node)
+
+A vertex is a single point.
+
+   A
+
+A = one vertex
+
+
+⭐ 3. Edge
+
+An edge connects two vertices.
+
+A ----- B
+
+Edge = (A, B)
+
+
+⭐ 4. Degree of a Vertex
+
+Degree = number of edges touching the vertex.
+
+    A
+   / \\
+  B   C
+      |
+      D
+
+deg(A) = 2
+deg(C) = 2
+deg(B) = 1
+deg(D) = 1
+
+
+⭐ 5. Path
+
+A path means moving from one vertex to another through edges.
+
+A ---- B ---- C ---- D
+
+Path: A → B → C → D
+
+
+⭐ 6. Loop
+
+A loop is when an edge connects a vertex to itself.
+
+   A
+  / \\
+  \\_/
+
+Loop = (A, A)
+
+
+⭐ 7. Adjacent Nodes (Neighbours)
+
+Nodes that are directly connected.
+
+A ----- B ----- C
+
+A & B are adjacent
+B & C are adjacent
+A & C are not adjacent
+
+
+⭐ 8. Undirected Graph
+
+Edges have no direction.
+
+A ----- B
+|       |
+|       |
+C ----- D
+
+
+⭐ 9. Directed Graph (Digraph)
+
+Edges have arrows (direction).
+
+A → B → C
+↑       ↓
+|_______|
+
+
+⭐ 10. Weighted Graph
+
+Edges have numbers (cost, distance, time).
+
+A -5- B
+|     |
+3     2
+|     |
+C -4- D
+
+
+⭐ 11. Cycle
+
+A path that starts and ends at the same vertex.
+
+A → B
+↑   ↓
+C ← D
+
+Cycle: A → B → D → C → A
+
+
+
+⭐ 12. Connected Graph (Very Easy Explanation)
+
+A connected graph means:
+
+👉 You can travel from ANY vertex to ANY other vertex.
+There is ALWAYS some path.
+
+Diagram (Connected Graph)
+
+A ----- B ----- C
+        |
+        D
+
+✔ How to check it's connected?
+
+From A → you can go to B → C → D
+From D → you can go to B → A → C
+From C → you can go to B → A → D
+
+You can reach any vertex from any other vertex.
+
+👉 That is why this is called a Connected Graph.
+
+
+
+⭐ 13. Disconnected Graph (Very Easy Explanation)
+
+A disconnected graph means:
+
+👉 Some vertices cannot reach the others.
+The graph is split into different parts.
+
+
+Diagram (Disconnected Graph)
+
+A ----- B       C ----- D
+
+✔ Why is this disconnected?
+
+Look carefully:
+
+A is connected to B
+C is connected to D
+BUT ❌ there is NO path between (A,B) part and (C,D) part.
+
+You cannot go from:
+
+A to C
+B to D
+C to A
+D to B
+
+They are in different groups → so the graph is disconnected.
+      
+      `
+    },
+    {
+      id: 27,
+      question: "27. Applications of BFS and DFS.",
+      answer: "",
+      codeExample: `
+⭐ Applications of BFS (with simple diagrams)
+
+Think of BFS as:
+
+👉 Searching level by level (nearest first)
+
+
+✅ 1. Finding Shortest Path
+
+A -- B -- C -- D
+
+
+From A to D, BFS checks:
+
+A → B → C → D
+(Shortest path)
+
+Easy to remember: BFS = Nearest First = Shortest Path
+
+
+✅ 2. Web Crawlers (Google Search)
+
+Page A
+ |  \\
+ B   C
+     |
+     D
+
+
+Google starts from Page A → visits all linked pages B, C → then pages linked to them (D).
+Easy: BFS = Explore pages level by level
+
+
+✅ 3. Social Networks (Friends suggestion)
+
+You → Friend → Friend-of-Friend
+
+
+BFS helps find friends-of-friends.
+Easy: BFS = “People you may know”
+
+
+✅ 4. Network Broadcasting
+
+Server
+ /  |  \\
+A   B   C
+
+
+One message → reaches A, B, C at the same time.
+Easy: BFS = Spread message quickly
+
+
+
+
+⭐ Applications of DFS (with simple diagrams)
+
+Think of DFS as:
+
+    👉 Going deep first
+    👉 Backtracking
+
+
+✅ 1. Solving a Maze
+
+Start → → ↓
+         Dead-end → go back
+
+
+DFS goes deep into the maze until dead-end → backtracks → finds a path.
+Easy: DFS = Maze solving
+
+
+✅ 2. Detecting Cycles
+
+A → B → C
+↑       ↓
+└───────┘
+
+
+DFS can detect this cycle.
+Easy: DFS = Finds loops
+
+
+✅ 3. Topological Sorting (Task order)
+
+A → B → C
+
+
+A before B, B before C.
+DFS helps find order.
+
+Easy: DFS = Scheduling tasks
+
+
+✅ 4. Finding Connected Components
+
+A—B     C—D
+
+
+DFS finds:
+
+Component 1: A, B
+Component 2: C, D
+
+Easy: DFS = Find groups
+
+
+⭐ SUPER EASY MEMORY TRICK
+
+BFS = Nearest First
+
+    Shortest path
+    Social friends
+    Web crawling
+    Broadcasting
+
+
+DFS = Deep First
+
+    Maze solving
+    Find cycles
+    Task ordering
+    Connected components
+
+-------------------------
+
+⭐ What is a Maze? (Super Easy Explanation)
+
+A maze is like a puzzle of paths where you must find a way out.
+
+Think of:
+
+    A garden maze
+    A game maze
+    A path with many turns
+    Some paths go forward
+    Some paths are dead-ends (wrong way)
+
+Here is a simple ASCII maze:
+
+Start
+  |
+  v
++---+---+---+
+| S |   |   |
++   +---+   +
+|   |   | E |
++---+   +---+
+
+
+S = Start point
+E = Exit point
+Boxes = paths
+Lines = walls
+
+Some paths go nowhere → dead-ends.
+
+
+⭐ How DFS works in a maze
+
+DFS does this:
+
+1. Go deep in one direction
+2. If stuck (dead-end), come back
+3. Try another path
+4. Continue until exit found
+
+Example:
+
+Start → → ↓
+       (Dead-end) → go back (↑)
+Try another direction
+
+
+This is why DFS is used to solve mazes.
+
+
+⭐ Super Simple Example Maze
+
+S → A → B → X (dead-end)
+        ↑
+        |
+        C → E (exit)
+
+
+DFS path:
+
+1. Go S → A → B → X
+2. X is dead-end → go back to B
+3. Try C
+4. C leads to E (exit)
+
+So DFS helps find a path by:
+
+👉 going deep
+👉 coming back
+👉 trying new paths
+
+
+⭐ EASY MEMORY TRICK:
+
+DFS = exploring a game maze
+Deep → stuck → backtrack → try next way.
+      `
+    },
+    {
+      id: 28,
+      question: "28. Difference: BFS vs DFS.",
+      answer: "",
+      codeExample: `
+⭐ BFS vs DFS (Easy Difference Table)
+
+| BFS                                                      | DFS                                              |
+| ---------------------------------------------------------| -------------------------------------------------|
+| Breadth-First Search                                     | Depth-First Search                               |
+| Visits level by level                                    | Visits deep path first                           |
+| Uses Queue (FIFO)                                        | Uses Stack (LIFO) or Recursion                   |
+| Finds shortest path                                      | Does not always find shortest path               |
+| Good for nearest-first search                            | Good for exploring whole structure               |
+| Used in social networks, web crawling, shortest path     | Used in mazes, cycle detection, topological sort |
+| Needs more memory                                        | Needs less memory                                |
+| Looks like spreading outward                             | Looks like going deep inside                     |
+
+
+
+⭐ Easy Diagram Difference
+
+BFS Diagram (Level by Level)
+
+     0
+   / | \\
+  1  2  3
+ / \\
+4   5
+
+BFS: 0 → 1 → 2 → 3 → 4 → 5
+
+
+👉 Visits all neighbors first
+👉 Then next level
+
+
+
+DFS Diagram (Deep First)
+
+     0
+   / | \\
+  1  2  3
+ /
+4
+ \\
+  5
+
+DFS: 0 → 1 → 4 → 5 → backtrack → 2 → backtrack → 3
+
+
+👉 Goes deep: 0 → 1 → 4 → 5
+👉 Then backtracks
+
+
+
+⭐ Very Simple Real-Life Examples
+
+BFS Real-Life
+
+Finding nearest:
+
+    nearest friend
+    nearest hospital
+    shortest route
+
+Because BFS thinks like:
+👉 “Check all nearby first.”
+
+
+DFS Real-Life
+
+Solving a maze:
+
+    Go deep inside
+    Hit a dead-end
+    Come back and try another route
+
+Because DFS thinks like:
+👉 “Go deep until stuck, then return.”
+
+
+⭐ Memory Trick (Very Easy)
+
+BFS = Broad First
+DFS = Deep First
+      
+      `
+    },
+    {
+      id: 29,
+      question: "29. Explain Spanning Tree with example.",
+      answer: "",
+      codeExample: `
+⭐ What is a Spanning Tree? (Easy Explanation)
+
+A spanning tree is a sub-graph of an undirected connected graph that:
+
+1. Includes all the vertices
+2. Has the minimum number of edges
+3. Has no cycles
+
+👉 If a graph has N vertices, a spanning tree always has N − 1 edges.
+
+
+⭐ Think of it like this:
+
+You have a graph with many roads and loops.
+A spanning tree removes extra edges but keeps every place connected.
+
+
+⭐ Example Graph
+
+Here is a normal graph:
+
+    A
+   / \\
+  B---C
+   \\ /
+    D
+
+Edges:
+(A,B), (A,C), (B,C), (B,D), (C,D)
+
+👉 This graph has cycles (triangles).
+
+
+⭐ Spanning Tree of This Graph
+
+A spanning tree removes cycles but keeps all vertices connected.
+
+One possible spanning tree:
+
+    A
+   / \\
+  B   C
+   \\
+    D
+
+Edges used:
+(A,B), (A,C), (B,D)
+
+👉 Uses 4 vertices and 3 edges (N − 1 = 4 − 1 = 3)
+👉 No cycles
+👉 All vertices connected
+
+
+⭐ Another example (even simpler)
+
+Original Graph:
+
+1 ----- 2
+| \\     |
+|   \\   |
+3 ----- 4
+
+Edges:
+(1,2), (1,3), (1,4), (3,4), (2,4)
+
+
+✔ Spanning Tree Example
+
+1 ----- 2
+|
+3
+ \\
+  4
+
+Edges used:
+(1,2), (1,3), (3,4)
+
+👉 All 4 vertices
+👉 Only 3 edges
+👉 No cycles → so it is a spanning tree
+
+
+⭐ Important Points to Remember
+
+A graph can have many different spanning trees
+A spanning tree always contains all vertices
+No cycles allowed
+Edges = (Vertices − 1)
+
+
+⭐ Very Easy Real-Life Example
+
+Imagine 4 houses connected with many roads.
+A spanning tree chooses the minimum roads needed so:
+
+    Every house is still reachable
+    No extra loops
+    No confusing paths
+      
+      `
+    },
+    {
+      id: 30,
+      question: "30. Explain Minimum Spanning Tree.",
+      answer: "",
+      codeExample: `
+⭐ What is a Minimum Spanning Tree (MST)?
+
+A Minimum Spanning Tree is a special type of Spanning Tree from a weighted graph.
+
+A Minimum Spanning Tree must:
+
+1. Include all vertices
+2. Have no cycles
+3. Use exactly N − 1 edges
+4. Have the minimum total weight
+
+👉 MST = Spanning Tree with lowest total cost
+
+⭐ Example Weighted Graph
+
+     (4)
+  A ------ B
+  | \\      |
+(3)|  \\(2) |(6)
+  |   \\    |
+  C ------ D
+      (5)
+
+
+Edges:
+
+A–B = 4
+A–C = 3
+A–D = 2
+C–D = 5
+B–D = 6
+
+
+⭐ Goal of MST
+
+Pick edges that:
+
+✔ Connect all vertices
+✔ Avoid cycles
+✔ Give the minimum weight sum
+
+
+⭐ Step-by-step (Very Easy)
+
+We choose smallest edges first:
+
+1️⃣ Pick A–D (2)
+
+Smallest weight
+
+2️⃣ Pick A–C (3)
+
+Next smallest
+
+3️⃣ Pick A–B (4)
+
+Next smallest
+(Do NOT pick C–D or B–D because they create cycles)
+
+
+⭐ Minimum Spanning Tree (MST)
+
+     A
+   / | \\
+ (3)(2)(4)
+ /   |   \\
+C    D    B
+
+
+Edges chosen:
+
+A–D = 2
+A–C = 3
+A–B = 4
+
+Total weight = 2 + 3 + 4 = 9
+
+👉 This is the minimum possible.
+
+
+⭐ Simple Real-Life Example
+
+Imagine 4 cities want to connect electricity wires.
+
+    Many possible roads
+    Some roads cost more
+    Some roads cost less
+
+MST finds the cheapest way to connect ALL cities without loops.
+
+
+⭐ Easy Memory Trick
+
+Spanning Tree = connects all nodes, no cycles
+Minimum Spanning Tree = connects all nodes with minimum cost
+      
+      `
+    },
+    {
+      id: 31,
+      question: "31. Linear Search vs Binary Search with algorithm.",
+      answer: "",
+      codeExample: `
+⭐ 1. Linear Search (Easy Explanation)
+
+Linear Search means:
+👉 Check elements one by one from start to end
+
+Example
+
+Array:
+
+[5, 8, 2, 9, 1]
+
+Searching for 9:
+
+Check in order:
+5 → 8 → 2 → 9 (found)
+
+When to use
+
+✔ Works on unsorted or sorted lists
+✔ Very simple
+❌ Slow for large data
+      
+
+⭐ Algorithm of Linear Search
+LinearSearch(A, key):
+
+1. Repeat for i = 0 to n-1:
+2.     If A[i] == key:
+3.         return i   // key found
+4. End Repeat
+5. return -1   // key not found
+
+
+
+⭐ 2. Binary Search (Easy Explanation)
+
+Binary Search means:
+👉 Divide the array into two halves
+👉 Check middle
+👉 Go LEFT or RIGHT
+❗ Works ONLY on sorted arrays
+
+Example (Sorted array)
+
+[2, 4, 6, 8, 10, 12]
+
+
+Search for 8
+
+Steps:
+
+Middle = 8 → found
+(If not found, go left or right)
+
+When to use
+
+✔ Very fast
+✔ Best for large sorted arrays
+❌ Works only on sorted data
+
+⭐ Algorithm of Binary Search (Iterative)
+BinarySearch(A, key):
+
+1. low = 0
+2. high = n - 1
+
+3. While low <= high:
+4.     mid = (low + high) / 2
+5.     
+6.     If A[mid] == key:
+7.         return mid
+8.     Else If key < A[mid]:
+9.         high = mid - 1
+10.    Else:
+11.         low = mid + 1
+12. return -1    // key not found
+
+--------------------------
+
+⭐ Diagrams
+Linear Search
+Array: [3, 8, 1, 9, 5]
+Search for 9
+
+3 → 8 → 1 → 9 (Found)
+
+Binary Search
+
+Array must be sorted:
+
+[2, 4, 6, 8, 10, 12]
+Search for 10
+
+Step 1: mid = 6
+Step 2: key > mid → go right
+Step 3: mid = 10 → found
+
+--------------------------
+
+⭐ Difference Table (Very Easy to Remember)
+
+| Linear Search              | Binary Search                  |
+| -------------------------- | ------------------------------ |
+| Checks elements one by one | Divides list in half each time |
+| Works on unsorted list     | Works only on sorted list  |
+| Slow for large data        | Very fast                      |
+| Time = O(n)                | Time = O(log n)                |
+| Simple                     | More efficient                 |
+
+
+
+⭐ 1. Linear Search in C
+#include <stdio.h>
+
+int main() {
+    int n, key, i, found = 0;
+
+    printf("Enter size of array: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    printf("Enter %d elements:\n", n);
+    for(i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Enter element to search: ");
+    scanf("%d", &key);
+
+    // Linear Search
+    for(i = 0; i < n; i++) {
+        if(arr[i] == key) {
+            found = 1;
+            break;
+        }
+    }
+
+    if(found)
+        printf("Element found at position %d\n", i + 1);
+    else
+        printf("Element not found.\n");
+
+    return 0;
+}
+
+⭐ 2. Binary Search in C
+
+⚠️ Remember: Binary Search works only on sorted array.
+
+#include <stdio.h>
+
+int main() {
+    int n, key, i, low, high, mid;
+
+    printf("Enter size of sorted array: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    printf("Enter %d sorted elements:\n", n);
+    for(i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Enter element to search: ");
+    scanf("%d", &key);
+
+    low = 0;
+    high = n - 1;
+
+    // Binary Search
+    while(low <= high) {
+        mid = (low + high) / 2;
+
+        if(arr[mid] == key) {
+            printf("Element found at position %d\n", mid + 1);
+            return 0;
+        }
+        else if(key < arr[mid]) {
+            high = mid - 1;   // search left part
+        }
+        else {
+            low = mid + 1;    // search right part
+        }
+    }
+
+    printf("Element not found.\n");
+
+    return 0;
+}
+
+
+
+
+------------------------------------------------------------------
+
+
+You are asking:
+
+“(0 + 1) / 2 = 0.5 → Why you choose 0? Why not choose 1?”
+
+This is the heart of your confusion.
+Let me clear it VERY VERY SIMPLE.
+
+⭐ In C Language:
+
+INTEGER ÷ INTEGER = INTEGER
+Decimals are removed (not rounded).
+
+So:
+
+0.5 → decimal part removed → 0
+
+Not rounded to 1.
+
+
+⭐ IMPORTANT RULE
+
+C does NOT round numbers.
+It truncates (cuts the decimal).
+
+So:
+
+| Math Value | C Integer Result |
+| ---------- | ---------------- |
+| 0.5        | 0                |
+| 1.5        | 1                |
+| 2.9        | 2                |
+| 3.7        | 3                |
+
+
+It NEVER makes 0.5 → 1.
+
+❗ Why C chooses 0, not 1?
+
+Because:
+
+✔ C does TRUNCATION
+
+Remove decimal → keep only whole number.
+
+
+❌ C does NOT ROUND
+
+Round 0.5 up → 1 → this is NOT done in C integer division.
+
+
+⭐ So your example:
+
+(0 + 1) / 2 = 1 / 2 = 0.5
+C integer division = 0
+
+
+You cannot choose 1.
+Because C doesn’t round.
+
+
+🔥 FINAL ONE-LINE ANSWER
+
+C always drops decimals.
+It never rounds.
+So 0.5 becomes 0, not 1.
+      `
+    },
+    {
+      id: 32,
+      question: "32. Bubble Sort working with diagram.",
+      answer: "",
+      codeExample: `
+⭐ Bubble Sort (Easy Explanation)
+
+Bubble Sort works like this:
+
+👉 Compare two numbers
+👉 If they are in wrong order, swap them
+👉 Repeat this again and again
+👉 Biggest number “bubbles up” to the end in each round
+
+Just like bubbles move upward in water.
+
+
+⭐ Example Array
+
+We will sort this array in ascending order:
+
+[5, 1, 4, 2]
+
+
+⭐ Bubble Sort Working (with diagrams)
+
+We compare adjacent elements in each pass.
+
+
+⭐ PASS 1
+
+Array:
+
+[5, 1, 4, 2]
+
+Step 1: Compare 5 and 1
+5 > 1 → swap
+
+[1, 5, 4, 2]
+
+Step 2: Compare 5 and 4
+5 > 4 → swap
+
+[1, 4, 5, 2]
+
+Step 3: Compare 5 and 2
+5 > 2 → swap
+
+[1, 4, 2, 5]
+
+➡ Largest element 5 moves to the end
+
+
+⭐ PASS 2
+
+Now array:
+
+[1, 4, 2, 5]
+
+Step 1: Compare 1 and 4
+1 < 4 → NO swap
+
+Step 2: Compare 4 and 2
+4 > 2 → swap
+
+[1, 2, 4, 5]
+
+Largest element of this round → 4 is fixed.
+
+
+⭐ PASS 3
+[1, 2, 4, 5]
+
+Step 1: Compare 1 and 2
+1 < 2 → NO swap
+
+Now only one element left—sorting is complete.
+
+
+⭐ FINAL SORTED ARRAY
+[1, 2, 4, 5]
+
+
+⭐ Bubble Sort Diagram (Full)
+
+Initial:      [5, 1, 4, 2]
+
+Pass 1:       [1, 5, 4, 2]
+               [1, 4, 5, 2]
+               [1, 4, 2, 5]
+
+Pass 2:       [1, 4, 2, 5]
+               [1, 2, 4, 5]
+
+Pass 3:       [1, 2, 4, 5]
+
+Final:        [1, 2, 4, 5]
+
+
+
+⭐ Easy Memory Trick
+
+Bubble Sort = Compare + Swap + Bubble biggest to end
+
+
+
+⭐ Bubble Sort Algorithm (Easy)
+
+BubbleSort(A, n):
+
+1. Repeat for i = 0 to n-2
+2.     Repeat for j = 0 to n-i-2
+3.         If A[j] > A[j+1]
+4.             Swap A[j] and A[j+1]
+5. End
+
+
+Explanation:
+
+Outer loop → number of passes
+Inner loop → compares adjacent elements
+Swap if element is in wrong order
+
+
+
+⭐ Bubble Sort Program in C
+
+#include <stdio.h>
+
+int main() {
+    int n, i, j, temp;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    printf("Enter %d elements:\n", n);
+    for(i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Bubble Sort
+    for(i = 0; i < n - 1; i++) {
+        for(j = 0; j < n - i - 1; j++) {
+
+            if(arr[j] > arr[j + 1]) {
+                // Swap
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+
+        }
+    }
+
+    printf("Sorted array:\n");
+    for(i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
+      
+      `
+    },
+    {
+      id: 33,
+      question: "33. Selection Sort working.",
+      answer: "",
+      codeExample: `
+⭐ Selection Sort (Easy Explanation)
+
+Selection Sort works like this:
+
+👉 Find the smallest element in the array
+👉 Put it in the first position
+👉 Then find the next smallest
+👉 Put it in the second position
+👉 Continue until the entire array is sorted
+
+It is like selecting the smallest number and placing it in order.
+
+⭐ Example Array
+
+We will sort this:
+
+[5, 3, 8, 1, 2]
+
+
+
+⭐ Selection Sort Diagram Summary
+
+Initial:     [5, 3, 8, 1, 2]
+
+Pass 1:      [1, 3, 8, 5, 2]
+
+Pass 2:      [1, 2, 8, 5, 3]
+
+Pass 3:      [1, 2, 3, 5, 8]
+
+Pass 4:      [1, 2, 3, 5, 8]
+
+Sorted:      [1, 2, 3, 5, 8]
+
+
+
+⭐ Selection Sort Algorithm (Very Easy)
+
+SelectionSort(A, n):
+
+1. Repeat for i = 0 to n-2
+2.     minIndex = i
+3.     
+4.     Repeat for j = i+1 to n-1
+5.         If A[j] < A[minIndex]
+6.             minIndex = j
+7.     
+8.     Swap A[i] and A[minIndex]
+9. End
+
+
+✔ Explanation:
+
+Pick position i
+Find the smallest element in the remaining array
+Swap smallest with A[i]
+Continue until the whole array is sorted
+
+
+⭐ Selection Sort Program in C
+
+#include <stdio.h>
+
+int main() {
+    int n, i, j, minIndex, temp;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    printf("Enter %d elements:\n", n);
+    for(i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Selection Sort
+    for(i = 0; i < n - 1; i++) {
+
+        minIndex = i;  // Assume current index is minimum
+
+        // Find actual minimum from remaining elements
+        for(j = i + 1; j < n; j++) {
+            if(arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        // Swap arr[i] with arr[minIndex]
+        temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
+    }
+
+    printf("Sorted array:\n");
+    for(i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
+    
+
+------------------------------------------------------
+
+
+What the variables mean
+
+    n = number of elements (here 5)
+    arr[] = your array
+    i = current index we want to fill with the correct (minimum) element
+    minIndex = index of the smallest element found so far in the unsorted part
+    j = index used to scan the unsorted part
+    temp = temporary variable used to swap two elements
+
+
+Initial state
+n = 5
+arr = [5, 3, 8, 1, 2]
+
+
+Selection sort runs i from 0 to n-2 (i.e., 0..3). At each i we:
+
+1. assume minIndex = i
+2. scan j = i+1 .. 4 to find the actual minimum index
+3. swap arr[i] and arr[minIndex] (even if minIndex == i)
+
+
+---------------------
+
+
+Iteration i = 0
+
+Start: i = 0
+Assume minIndex = 0 → arr[minIndex] = arr[0] = 5
+
+Scan j from 1 to 4:
+
+    j = 1: compare arr[1] = 3 with arr[minIndex] = 5 → 3 < 5 → update minIndex = 1
+    j = 2: compare arr[2] = 8 with arr[1] = 3 → 8 < 3 ? No → minIndex remains 1
+    j = 3: compare arr[3] = 1 with arr[1] = 3 → 1 < 3 → update minIndex = 3
+    j = 4: compare arr[4] = 2 with arr[3] = 1 → 2 < 1 ? No → minIndex remains 3
+
+After scanning, minIndex = 3 (value 1).
+
+
+Swap arr[0] and arr[3]:
+
+temp = arr[0] = 5
+arr[0] = arr[3] = 1
+arr[3] = temp = 5
+
+
+Array becomes:
+
+arr = [1, 3, 8, 5, 2]
+
+
+---------------------
+
+
+Iteration i = 1
+
+Start: i = 1
+Assume minIndex = 1 → arr[minIndex] = arr[1] = 3
+
+
+Scan j = 2..4:
+
+    j = 2: compare arr[2] = 8 with arr[1] = 3 → 8 < 3 ? No
+    j = 3: compare arr[3] = 5 with arr[1] = 3 → 5 < 3 ? No
+    j = 4: compare arr[4] = 2 with arr[1] = 3 → 2 < 3 → update minIndex = 4
+
+After scanning, minIndex = 4 (value 2).
+
+
+Swap arr[1] and arr[4]:
+
+temp = arr[1] = 3
+arr[1] = arr[4] = 2
+arr[4] = temp = 3
+
+
+Array becomes:
+
+arr = [1, 2, 8, 5, 3]
+
+
+---------------------
+
+
+Iteration i = 2
+
+Start: i = 2
+Assume minIndex = 2 → arr[minIndex] = arr[2] = 8
+
+Scan j = 3..4:
+
+    j = 3: compare arr[3] = 5 with arr[2] = 8 → 5 < 8 → update minIndex = 3
+    j = 4: compare arr[4] = 3 with arr[3] = 5 → 3 < 5 → update minIndex = 4
+
+After scanning, minIndex = 4 (value 3).
+
+
+Swap arr[2] and arr[4]:
+
+temp = arr[2] = 8
+arr[2] = arr[4] = 3
+arr[4] = temp = 8
+
+
+Array becomes:
+
+arr = [1, 2, 3, 5, 8]
+
+
+---------------------
+
+
+Iteration i = 3
+
+Start: i = 3
+Assume minIndex = 3 → arr[minIndex] = arr[3] = 5
+
+Scan j = 4:
+
+    j = 4: compare arr[4] = 8 with arr[3] = 5 → 8 < 5 ? No → minIndex remains 3
+
+After scanning, minIndex = 3. Swap with itself happens (harmless):
+
+
+Swap arr[3] and arr[3]:
+
+temp = arr[3] = 5
+arr[3] = arr[3] = 5
+arr[3] = temp = 5
+
+
+Array remains:
+
+arr = [1, 2, 3, 5, 8]
+
+
+
+
+End
+
+i stops at n-2 = 3. Final sorted array printed by the program:
+
+Sorted array:
+1 2 3 5 8
+
+
+Visual summary of array after each outer iteration
+
+After i = 0 → [1, 3, 8, 5, 2]
+After i = 1 → [1, 2, 8, 5, 3]
+After i = 2 → [1, 2, 3, 5, 8]
+After i = 3 → [1, 2, 3, 5, 8] (no change)
+
+
+Complexity quick note
+
+Time: O(n²) comparisons in worst/average/best (selection sort always scans remaining elements)
+Space: O(1) extra (in-place sort)
+      `
+    },
+    {
+      id: 34,
+      question: "34. Insertion Sort working.",
+      answer: "",
+      codeExample: `
+⭐ Insertion Sort (Easy Explanation)
+
+Insertion Sort works like this:
+
+👉 You take elements one by one
+👉 Insert each element into its correct position in the sorted part
+👉 The left side becomes sorted gradually
+
+Think of arranging playing cards in your hand.
+
+
+⭐ Insertion Sort Algorithm
+InsertionSort(A, n):
+
+1. Repeat for i = 1 to n-1
+2.     key = A[i]
+3.     j = i - 1
+4.     
+5.     While j >= 0 AND A[j] > key
+6.         A[j + 1] = A[j]
+7.         j = j - 1
+8.     
+9.     A[j + 1] = key
+10. End
+
+
+
+⭐ Insertion Sort Program in C
+
+#include <stdio.h>
+
+int main() {
+    int n, i, j, key;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    printf("Enter %d elements:\n", n);
+    for(i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    // Insertion Sort
+    for(i = 1; i < n; i++) {
+        key = arr[i];
+        j = i - 1;
+
+        // Move elements greater than key
+        while(j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+
+        arr[j + 1] = key;
+    }
+
+    printf("Sorted array:\n");
+    for(i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
+
+
+------------------------------------------------------
+
+
+✔ Array = [5, 2, 4, 6, 1]
+
+Insertion sort works like this:
+
+Start from index 1
+Take that element as key
+Shift all bigger elements to the right
+Insert key into correct position
+
+Let’s go one pass at a time.
+
+⭐ Initial Array
+[5, 2, 4, 6, 1]
+
+
+✅ i = 1
+key = arr[1] = 2
+j = 0
+
+
+Compare:
+
+arr[j] = 5 > key(2)  → shift 5 right
+
+
+Array after shift:
+
+[5, 5, 4, 6, 1]
+
+
+j-- → j = -1
+
+Insert key at position j+1 = 0
+
+arr[0] = 2
+
+
+Array becomes:
+
+[2, 5, 4, 6, 1]
+
+
+
+✅ i = 2
+key = arr[2] = 4
+j = 1
+
+
+Compare:
+
+arr[1] = 5 > key(4) → shift 5 right
+
+
+Array:
+
+[2, 5, 5, 6, 1]
+
+
+j-- → j = 0
+
+Compare:
+
+arr[0] = 2 > 4 ? No → stop
+
+
+Insert key at j+1 = 1:
+
+arr[1] = 4
+
+
+Array becomes:
+
+[2, 4, 5, 6, 1]
+
+
+
+✅ i = 3
+key = 6
+j = 2
+
+
+Compare:
+
+arr[2] = 5 > 6 ? No
+
+
+No shifts. Insert key at same place.
+
+Array remains:
+
+[2, 4, 5, 6, 1]
+
+
+
+✅ i = 4
+key = 1
+j = 3
+
+
+Now big shifting happens:
+
+Compare:
+
+arr[3] = 6 > 1 → shift
+
+
+Array:
+
+[2, 4, 5, 6, 6]
+
+
+j = 2
+
+Compare:
+
+arr[2] = 5 > 1 → shift
+
+
+Array:
+
+[2, 4, 5, 5, 6]
+
+
+j = 1
+
+Compare:
+
+arr[1] = 4 > 1 → shift
+
+
+Array:
+
+[2, 4, 4, 5, 6]
+
+
+j = 0
+
+Compare:
+
+arr[0] = 2 > 1 → shift
+
+
+Array:
+
+[2, 2, 4, 5, 6]
+
+j = -1 → stop
+Insert key at j+1 = 0
+
+arr[0] = 1
+
+
+Array becomes:
+
+[1, 2, 4, 5, 6]
+
+
+🎉 FINAL SORTED ARRAY
+1 2 4 5 6
+
+
+🌟 Summary of each step:
+
+| i | key | Resulting array |
+| - | --- | --------------- |
+| 1 | 2   | [2, 5, 4, 6, 1] |
+| 2 | 4   | [2, 4, 5, 6, 1] |
+| 3 | 6   | [2, 4, 5, 6, 1] |
+| 4 | 1   | [1, 2, 4, 5, 6] |
+
+      `
+    },
+    {
+      id: 35,
+      question: "35. Quick Sort – Pivot, Partition, Recursion.",
+      answer: "",
+      codeExample: `
+⭐ 1. Quick Sort (Easy Explanation)
+
+Quick Sort is a sorting method that works in 3 main steps:
+
+1. Pivot
+
+Choose one element from the array.
+This element is called pivot.
+The pivot helps to divide the array.
+
+
+2. Partition
+
+Move all smaller elements to left of pivot.
+Move all larger elements to right of pivot.
+After partition, pivot is in correct sorted position.
+
+
+3. Recursion
+
+Apply Quick Sort again on:
+    Left part of pivot
+    Right part of pivot
+Continue until the whole array is sorted.
+
+
+
+------------
+
+⭐ 2. Example (Simple and Clear)
+
+Array:
+
+[8, 4, 7, 3, 9, 1]
+
+
+Step 1: Choose pivot = 8
+
+Partition result:
+
+    Left side:  elements < 8 → [4, 7, 3, 1]
+    Pivot:                         8
+    Right side: elements > 8 → [9]
+
+
+Step 2: Apply Quick Sort on left side:
+
+    [4, 7, 3, 1]
+    Pivot = 4
+
+
+Step 3: Apply Quick Sort again until all parts are sorted.
+
+Final sorted array:
+
+[1, 3, 4, 7, 8, 9]
+
+
+-------------------------------------------------------------
+
+
+⭐ Simple & Short Quick Sort Program in C
+
+#include <stdio.h>
+
+void quickSort(int a[], int low, int high) {
+    int i = low, j = high, pivot = a[(low + high) / 2], temp;
+
+    while(i <= j) {
+        while(a[i] < pivot) i++;
+        while(a[j] > pivot) j--;
+
+        if(i <= j) {
+            temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+            i++;
+            j--;
+        }
+    }
+
+    if(low < j) quickSort(a, low, j);
+    if(i < high) quickSort(a, i, high);
+}
+
+int main() {
+    int n, i;
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    int a[n];
+
+    printf("Enter %d elements:\n", n);
+    for(i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+
+    quickSort(a, 0, n - 1);
+
+    printf("Sorted array:\n");
+    for(i = 0; i < n; i++)
+        printf("%d ", a[i]);
+
+    return 0;
+}
+
+
+
+
+⭐ Simple Quick Sort Algorithm (matching the short program)
+
+QuickSort(A, low, high):
+
+1. Set i = low
+2. Set j = high
+3. Set pivot = A[(low + high) / 2]
+
+4. While i <= j:
+5.     Move i right until A[i] >= pivot
+6.     Move j left until A[j] <= pivot
+7.     If i <= j:
+8.         Swap A[i] and A[j]
+9.         i = i + 1
+10.        j = j - 1
+
+11. If low < j:
+12.     QuickSort(A, low, j)
+
+13. If i < high:
+14.     QuickSort(A, i, high)
+      `
+    },
+    {
       id: 1,
       question: "",
       answer: "",
       codeExample: ``
     },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+      codeExample: ``
+    },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+      codeExample: ``
+    },
+
+
 
   ];
 
