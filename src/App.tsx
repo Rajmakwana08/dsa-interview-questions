@@ -4792,14 +4792,14 @@ int front = -1, rear = -1;
 
 void enqueue(int x) {
     if (rear == MAX - 1) {
-        printf("Queue Overflow\n");
+        printf("Queue Overflow\\n");
     } else {
         if (front == -1)
             front = 0;  // first element being inserted
         
         rear = rear + 1;
         queue[rear] = x;
-        printf("%d inserted into queue\n", x);
+        printf("%d inserted into queue\\n", x);
     }
 }
 
@@ -6334,7 +6334,7 @@ int main() {
 
     int arr[n];
 
-    printf("Enter %d elements:\n", n);
+    printf("Enter %d elements:\\n", n);
     for(i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
     }
@@ -6351,9 +6351,9 @@ int main() {
     }
 
     if(found)
-        printf("Element found at position %d\n", i + 1);
+        printf("Element found at position %d\\n", i + 1);
     else
-        printf("Element not found.\n");
+        printf("Element not found.\\n");
 
     return 0;
 }
@@ -6372,7 +6372,7 @@ int main() {
 
     int arr[n];
 
-    printf("Enter %d sorted elements:\n", n);
+    printf("Enter %d sorted elements:\\n", n);
     for(i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
     }
@@ -6388,7 +6388,7 @@ int main() {
         mid = (low + high) / 2;
 
         if(arr[mid] == key) {
-            printf("Element found at position %d\n", mid + 1);
+            printf("Element found at position %d\\n", mid + 1);
             return 0;
         }
         else if(key < arr[mid]) {
@@ -6399,7 +6399,7 @@ int main() {
         }
     }
 
-    printf("Element not found.\n");
+    printf("Element not found.\\n");
 
     return 0;
 }
@@ -6614,7 +6614,7 @@ int main() {
 
     int arr[n];
 
-    printf("Enter %d elements:\n", n);
+    printf("Enter %d elements:\\n", n);
     for(i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
     }
@@ -6633,7 +6633,7 @@ int main() {
         }
     }
 
-    printf("Sorted array:\n");
+    printf("Sorted array:\\n");
     for(i = 0; i < n; i++) {
         printf("%d ", arr[i]);
     }
@@ -6719,7 +6719,7 @@ int main() {
 
     int arr[n];
 
-    printf("Enter %d elements:\n", n);
+    printf("Enter %d elements:\\n", n);
     for(i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
     }
@@ -6742,7 +6742,7 @@ int main() {
         arr[minIndex] = temp;
     }
 
-    printf("Sorted array:\n");
+    printf("Sorted array:\\n");
     for(i = 0; i < n; i++) {
         printf("%d ", arr[i]);
     }
@@ -6959,7 +6959,7 @@ int main() {
 
     int arr[n];
 
-    printf("Enter %d elements:\n", n);
+    printf("Enter %d elements:\\n", n);
     for(i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
     }
@@ -6978,7 +6978,7 @@ int main() {
         arr[j + 1] = key;
     }
 
-    printf("Sorted array:\n");
+    printf("Sorted array:\\n");
     for(i = 0; i < n; i++) {
         printf("%d ", arr[i]);
     }
@@ -7259,13 +7259,13 @@ int main() {
 
     int a[n];
 
-    printf("Enter %d elements:\n", n);
+    printf("Enter %d elements:\\n", n);
     for(i = 0; i < n; i++)
         scanf("%d", &a[i]);
 
     quickSort(a, 0, n - 1);
 
-    printf("Sorted array:\n");
+    printf("Sorted array:\\n");
     for(i = 0; i < n; i++)
         printf("%d ", a[i]);
 
