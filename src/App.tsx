@@ -7228,6 +7228,31 @@ Final sorted array:
 -------------------------------------------------------------
 
 
+⭐ Simple Quick Sort Algorithm (matching the short program)
+
+QuickSort(A, low, high):
+
+1. Set i = low
+2. Set j = high
+3. Set pivot = A[(low + high) / 2]
+
+4. While i <= j:
+5.     Move i right until A[i] >= pivot
+6.     Move j left until A[j] <= pivot
+7.     If i <= j:
+8.         Swap A[i] and A[j]
+9.         i = i + 1
+10.        j = j - 1
+
+11. If low < j:
+12.     QuickSort(A, low, j)
+
+13. If i < high:
+14.     QuickSort(A, i, high)
+
+
+
+
 ⭐ Simple & Short Quick Sort Program in C
 
 #include <stdio.h>
@@ -7273,36 +7298,2049 @@ int main() {
 }
 
 
+--------------------------------------------------------------
+code explaination with detailed steps
 
 
-⭐ Simple Quick Sort Algorithm (matching the short program)
+✅ Array: [8, 4, 7, 3, 9, 1]
 
-QuickSort(A, low, high):
+And this time I will clearly show:
 
-1. Set i = low
-2. Set j = high
-3. Set pivot = A[(low + high) / 2]
+i, j, pivot
 
-4. While i <= j:
-5.     Move i right until A[i] >= pivot
-6.     Move j left until A[j] <= pivot
-7.     If i <= j:
-8.         Swap A[i] and A[j]
-9.         i = i + 1
-10.        j = j - 1
+swaps
 
-11. If low < j:
-12.     QuickSort(A, low, j)
+final partitions
 
-13. If i < high:
-14.     QuickSort(A, i, high)
+AND whether these two conditions run or not:
+
+if (low < j)
+if (i < high)
+
+⭐ START: quickSort(a, 0, 5)
+
+Array: [8, 4, 7, 3, 9, 1]
+low = 0, high = 5
+
+Pivot = a[(0+5)/2] = a[2] = 7
+i = 0
+j = 5
+pivot = 7
+
+🔵 PASS 1 — Partitioning
+Move i →
+a[i] = 8 < 7 ? NO → stop i=0
+
+Move j ←
+a[j] = 1 > 7 ? NO → stop j=5
+
+Swap a[0], a[5] → (8 ↔ 1)
+
+Array becomes:
+
+[1, 4, 7, 3, 9, 8]
+
+
+Move i, j:
+
+i = 1
+j = 4
+
+🔵 PASS 2
+Move i →
+a[i] = 4 < 7 → i=2
+a[i] = 7 < 7 ? NO → stop i=2
+
+Move j ←
+a[j] = 9 > 7 → j=3
+a[j] = 3 > 7 ? NO → stop j=3
+
+Swap a[2], a[3] → (7 ↔ 3)
+
+Array becomes:
+
+[1, 4, 3, 7, 9, 8]
+
+
+Move i, j:
+
+i = 3
+j = 2
+
+🛑 STOP Partition (i > j)
+
+So partition indices:
+
+Left part: low = 0 → j = 2
+Right part: i = 3 → high = 5
+
+⭐ NOW CHECK CONDITIONS
+CONDITION 1:
+if (low < j)
+0 < 2 → TRUE
+
+
+👉 Call: quickSort(a, 0, 2)
+
+CONDITION 2:
+if (i < high)
+3 < 5 → TRUE
+
+
+👉 Call: quickSort(a, 3, 5)
+
+🔥 Now we go inside both recursive calls.
+==========================================
+✅ LEFT RECURSION: quickSort(a, 0, 2)
+
+Subarray: [1, 4, 3]
+
+Pivot = middle = a[(0+2)/2] = a[1] = 4
+
+i = 0
+j = 2
+pivot = 4
+
+🔵 PASS 1
+
+Move i →
+
+a[i] = 1 < 4 → i=1
+a[i] = 4 < 4 ? NO → stop i=1
+
+
+Move j ←
+
+a[j] = 3 > 4 ? NO → stop j=2
+
+
+Swap a[1], a[2] → (4 ↔ 3)
+
+Array:
+
+[1, 3, 4, 7, 9, 8]
+
+
+Move:
+
+i = 2
+j = 1
+
+
+Stop loop.
+
+✔ LEFT PARTITION RESULTS (0,2):
+
+Left: 0 to j = 1
+Right: i = 2 to 2
+
+CONDITION 1:
+if (low < j)
+0 < 1 → TRUE
+
+
+👉 Call: quickSort(a, 0, 1)
+
+CONDITION 2:
+if (i < high)
+2 < 2 → FALSE
+
+
+❌ No call to quickSort(a, 2, 2)
+
+==========================================
+✅ LEFT-LEFT RECURSION: quickSort(a, 0, 1)
+
+Subarray: [1, 3]
+
+Pivot = a[ (0+1)/2 ] = a[0] = 1
+
+i = 0
+j = 1
+pivot = 1
+
+Move i
+a[i] = 1 < 1 ? NO → stop
+
+Move j
+a[j] = 3 > 1 → j=0
+a[j] = 1 > 1 ? NO → stop
+
+Swap a[0], a[0] (same element, no change)
+i = 1
+j = -1
+
+
+Partition done.
+
+Conditions:
+
+Left:
+
+if (0 < -1) → FALSE
+
+
+Right:
+
+if (1 < 1) → FALSE
+
+
+No more recursion.
+
+==========================================
+🎉 LEFT SIDE COMPLETELY SORTED:
+[1, 3, 4, 7, 9, 8]
+
+==========================================
+✅ RIGHT RECURSION: quickSort(a, 3, 5)
+
+Subarray: [7, 9, 8]
+
+Pivot = middle = a[(3+5)/2] = a[4] = 9
+
+i = 3
+j = 5
+pivot = 9
+
+🔵 PASS 1
+
+Move i →
+
+a[i] = 7 < 9 → i=4
+a[i] = 9 < 9 ? NO → stop
+
+
+Move j ←
+
+a[j] = 8 > 9 ? NO → stop
+
+
+Swap a[4], a[5] → (9 ↔ 8)
+
+Array:
+
+[1, 3, 4, 7, 8, 9]
+
+
+i = 5
+j = 4
+Loop ends.
+
+Left part: 3 → 4
+Right part: 5 → 5
+
+CONDITIONS:
+if (3 < 4) → TRUE → quickSort(a, 3, 4)
+if (5 < 5) → FALSE
+
+==========================================
+🔹 quickSort(a, 3, 4)
+
+Subarray: [7, 8]
+
+Pivot = a[3] = 7
+
+i = 3
+j = 4
+
+
+Move i:
+
+a[i] = 7 < 7 ? NO
+
+
+Move j:
+
+a[j] = 8 > 7 → j=3
+a[j] = 7 > 7 ? NO
+
+
+Swap → swap same element
+i=4, j=2
+
+Conditions:
+
+if (3 < 2) FALSE
+if (4 < 4) FALSE
+
+
+No recursion.
+
+🎉 FINAL SORTED ARRAY
+[1, 3, 4, 7, 8, 9]
+
+
       `
     },
     {
-      id: 1,
+      id: 36,
+      question: "36. Merge Sort – Divide, Conquer, Merge.",
+      answer: "",
+      codeExample: `
+⭐ 1. Merge Sort (Easy Explanation)
+
+Merge Sort works in three steps:
+
+⭐ 1. Divide (Break the array)
+
+👉 Break the array into two parts
+👉 Then break those parts again
+👉 Keep breaking until each part has only 1 element
+
+Example:
+If array is:
+
+[8, 3, 5, 4]
+
+
+Break into two parts:
+
+[8, 3]   and   [5, 4]
+
+
+Break again:
+
+[8] [3]   and   [5] [4]
+
+Now each part has 1 element → stop breaking.
+
+
+
+⭐ 2. Conquer (Sort small parts)
+
+A single element is already sorted.
+So nothing to do here.
+
+You just take the small parts and get ready to join them.
+
+
+
+⭐ 3. Merge (Join in sorted order)
+
+Now join the small parts in sorted order.
+
+Example:
+
+Join [8] and [3] → becomes [3, 8]
+Join [5] and [4] → becomes [4, 5]
+
+Now join [3, 8] and [4, 5] →
+
+Final result:
+
+[3, 4, 5, 8]
+
+This is the sorted array.
+
+
+
+⭐ ONE-LINE MEMORY TRICK
+
+Break → Break → Join sorted.
+
+
+⭐ WHY IS IT CALLED MERGE SORT?
+
+Because the last step joins (merges) small sorted parts
+to make the final sorted array.
+
+
+
+⭐ 2. Simple Example
+
+Array:
+
+[8, 3, 5, 4]
+
+Step 1: Divide
+
+→ Break into smaller parts
+→ Until each part has one element.
+
+Step 2: Conquer
+
+Each small part becomes sorted automatically
+(because 1 element is already sorted).
+
+Step 3: Merge
+
+Merge small sorted parts into bigger sorted parts
+until the whole array is sorted.
+
+
+
+Final:
+
+[3, 4, 5, 8]
+
+⭐ 3. Merge Sort Algorithm (Easy and Short)
+
+MergeSort(A, low, high):
+
+1. If low < high:
+2.     mid = (low + high) / 2
+3.     MergeSort(A, low, mid)       // left half
+4.     MergeSort(A, mid + 1, high)  // right half
+5.     Merge(A, low, mid, high)     // merge both halves
+
+
+Merge Algorithm
+
+Merge(A, low, mid, high):
+
+1. Create two temporary arrays: left, right
+2. Copy data into left and right arrays
+3. Compare elements of both arrays
+4. Put smaller element back into original array
+5. Copy remaining elements from left (if any)
+6. Copy remaining elements from right (if any)
+
+
+⭐ 4. Simple & Short Merge Sort Program in C
+
+#include <stdio.h>
+
+void merge(int a[], int low, int mid, int high) {
+    int i = low, j = mid + 1, k = 0;
+    int temp[high - low + 1];
+
+    while(i <= mid && j <= high) {
+        if(a[i] < a[j])
+            temp[k++] = a[i++];
+        else
+            temp[k++] = a[j++];
+    }
+
+    while(i <= mid)
+        temp[k++] = a[i++];
+
+    while(j <= high)
+        temp[k++] = a[j++];
+
+    for(i = low, k = 0; i <= high; i++, k++)
+        a[i] = temp[k];
+}
+
+void mergeSort(int a[], int low, int high) {
+    if(low < high) {
+        int mid = (low + high) / 2;
+
+        mergeSort(a, low, mid);
+        mergeSort(a, mid + 1, high);
+
+        merge(a, low, mid, high);
+    }
+}
+
+int main() {
+    int n, i;
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    int a[n];
+    printf("Enter %d elements:\\n", n);
+    for(i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+
+    mergeSort(a, 0, n - 1);
+
+    printf("Sorted array:\\n");
+    for(i = 0; i < n; i++)
+        printf("%d ", a[i]);
+
+    return 0;
+}
+ 
+
+
+--------------------------------------------------------------
+
+
+⭐ ARRAY = [8, 4, 7, 3, 9, 1]
+
+I will show:
+
+When mergeSort() is called
+
+What values of low, mid, high are
+
+How merge() compares and copies values
+
+How temp[] and a[] change
+
+Everything step-by-step.
+
+🚀 STEP 1 – main()
+mergeSort(a, 0, 5);
+
+
+So we start with:
+
+low = 0
+high = 5
+array = [8, 4, 7, 3, 9, 1]
+
+⭐ mergeSort(a, 0, 5)
+mid = (0+5)/2 = 2
+
+
+So two parts:
+
+LEFT → mergeSort(a, 0, 2)
+RIGHT → mergeSort(a, 3, 5)
+
+================================================================
+🔵 LEFT PART: mergeSort(a, 0, 2)
+low=0, high=2
+mid = (0+2)/2 = 1
+
+
+Split again:
+
+LEFT → mergeSort(a, 0,1)
+RIGHT → mergeSort(a, 2,2)
+
+🔵 mergeSort(a, 0,1)
+low=0, high=1
+mid = 0
+
+
+LEFT → mergeSort(a,0,0)
+RIGHT → mergeSort(a,1,1)
+
+Both single → no action.
+
+Now merge(a, 0, 0, 1)
+Subarray: [8,4]
+
+🟢 Explanation of merge(a,0,0,1)
+i = 0
+j = 1
+temp = []
+
+
+Compare:
+
+a[i]=8, a[j]=4
+4 < 8 → temp = [4], j=2
+
+
+Now j > high → copy remaining i
+
+temp = [4, 8]
+
+
+Copy back into array:
+
+a[0] = 4
+a[1] = 8
+
+
+Array becomes:
+
+[4, 8, 7, 3, 9, 1]
+
+🔵 mergeSort(a, 2,2)
+
+Single element → do nothing
+Subarray is simply [7]
+
+🔵 Now merge(a,0,1,2)
+
+Subarray = [4,8,7]
+
+i = 0, j = 2
+temp = []
+
+
+Compare:
+
+4 vs 7 → 4 smaller → temp=[4], i=1
+8 vs 7 → 7 smaller → temp=[4,7], j=3
+Copy remaining (8)
+temp=[4,7,8]
+
+
+Copy back:
+
+Array becomes:
+
+[4, 7, 8, 3, 9, 1]
+
+⭐ LEFT SIDE COMPLETE
+[4, 7, 8]
+
+================================================================
+🔴 RIGHT PART: mergeSort(a, 3, 5)
+low=3, high=5
+mid = 4
+
+
+LEFT → mergeSort(a,3,4)
+RIGHT → mergeSort(a,5,5)
+
+🔴 mergeSort(a,3,4)
+low=3, high=4
+mid=3
+
+
+LEFT → mergeSort(a,3,3)
+RIGHT → mergeSort(a,4,4)
+
+Both single.
+
+Now merge(a,3,3,4)
+
+Subarray = [3,9]
+
+i=3, j=4
+3 < 9 → temp=[3], i=4
+copy remaining 9 → temp=[3,9]
+
+
+Copy back:
+Array becomes:
+
+[4, 7, 8, 3, 9, 1]
+
+
+(No change actually)
+
+🔴 mergeSort(a,5,5)
+
+Single → nothing.
+
+Now final right merge:
+
+merge(a,3,4,5)
+
+Subarray = [3,9,1]
+
+i=3, j=5
+
+
+Compare:
+
+3 vs 1 → take 1 → temp=[1], j=6
+j passed → take remaining 3,9
+temp=[1,3,9]
+
+
+Copy back:
+
+Array becomes:
+
+[4, 7, 8, 1, 3, 9]
+
+================================================================
+⭐ FINAL MERGE: merge(a,0,2,5)
+
+Left side: [4,7,8]
+Right side: [1,3,9]
+
+i=0, j=3
+temp=[]
+
+
+Compare step-by-step:
+
+4 vs 1 → 1 → temp=[1]
+4 vs 3 → 3 → temp=[1,3]
+4 vs 9 → 4 → temp=[1,3,4]
+7 vs 9 → 7 → temp=[1,3,4,7]
+8 vs 9 → 8 → temp=[1,3,4,7,8]
+Remaining → 9 → temp=[1,3,4,7,8,9]
+
+
+Copy back:
+
+Final array:
+
+[1, 3, 4, 7, 8, 9]
+
+🎉 FINAL SORTED ARRAY
+1 3 4 7 8 9
+
+
+
+------------------
+
+
+Array: [4, 8, 7, 3, 9, 1]
+We just finished merge(a, 0, 0, 1)
+
+
+🔵 Back to mergeSort(a, 0, 2) — next step
+
+We had:
+
+mergeSort(a, 2, 2)   // right part of this call
+mergeSort(a, 2, 2) is single element (low == high), so it returns immediately. Subarray at indices 0..2 is now: [4, 8, 7].
+
+Now we call:
+
+merge(a, 0, 1, 2)
+Parameters: low=0, mid=1, high=2
+Left part = a[0..1] = [4,8]
+Right part = a[2..2] = [7]
+
+Inside merge(a,0,1,2):
+
+Initial:
+
+i = low = 0
+j = mid+1 = 2
+k = 0
+temp size = high-low+1 = 3  → temp = [ , , ]
+
+
+Step-by-step comparisons:
+
+Compare a[i]=a[0]=4 and a[j]=a[2]=7
+4 < 7 → temp[0] = 4, then i++ and k++
+Now: i=1, j=2, k=1, temp = [4, , ]
+
+Compare a[i]=a[1]=8 and a[j]=a[2]=7
+8 < 7? NO → take a[j] → temp[1] = 7, then j++ and k++
+Now: i=1, j=3, k=2, temp = [4,7, ]
+
+
+j (3) > high (2) → exit first while. Copy remaining left:
+
+i <= mid → temp[2] = a[1] = 8, then i=2, k=3
+temp = [4,7,8]
+
+
+Copy temp back into a at positions i = low .. high:
+
+a[0] = temp[0] = 4
+a[1] = temp[1] = 7
+a[2] = temp[2] = 8
+
+Array becomes:
+
+[4, 7, 8, 3, 9, 1]
+Left side (indices 0..2) is now sorted: [4,7,8].
+
+
+
+🔴 Right half of the original call: mergeSort(a, 3, 5)
+
+Call:
+
+mergeSort(a, 3, 5)
+mid = (3+5)/2 = 4
+
+
+So it calls:
+
+mergeSort(a, 3, 4)
+mergeSort(a, 5, 5)
+
+
+mergeSort(a, 3, 4):
+
+low=3, high=4, mid=3
+Calls: mergeSort(a,3,3) and mergeSort(a,4,4) → both return (single elements)
+Then merge(a, 3, 3, 4)
+
+
+Subarray a[3..4] is [3,9] (from current full array [4,7,8,3,9,1]).
+merge(a,3,3,4):
+
+Initial:
+
+i = 3, j = 4, k = 0, temp size = 2 → temp = [ , ]
+
+
+Compare a[3]=3 and a[4]=9 → 3 < 9 → temp[0]=3, i=4,k=1
+i > mid now → copy remaining right:
+temp[1] = a[4] = 9
+
+Copy back:
+
+a[3] = 3
+a[4] = 9
+
+
+Array remains:
+
+[4, 7, 8, 3, 9, 1]
+
+(no change since it was already [3,9])
+
+mergeSort(a, 5, 5) → single element [1], returns.
+
+
+Now merge the two right subparts:
+
+merge(a, 3, 4, 5)
+
+Left part a[3..4] = [3,9], Right part a[5..5] = [1].
+
+merge(a,3,4,5):
+
+Initial:
+
+i = 3, j = 5, k = 0, temp size = 3 → temp = [ , , ]
+
+
+Step-by-step:
+
+Compare a[3]=3 and a[5]=1 → 3 < 1? NO → take a[j]=1 → temp[0]=1, j=6,k=1
+    Now j > high so exit first while.
+
+Copy remaining left elements (i <= mid):
+
+    temp[1] = a[3] = 3, i=4,k=2
+    temp[2] = a[4] = 9, i=5,k=3
+
+temp = [1,3,9]
+
+
+Copy back into a[3..5]:
+
+a[3] = 1
+a[4] = 3
+a[5] = 9
+
+
+Array becomes:
+
+[4, 7, 8, 1, 3, 9]
+
+Right side (indices 3..5) is now [1,3,9].
+
+
+🔵 Final merge of the whole array:
+We now have two sorted halves:
+
+Left a[0..2] = [4,7,8]
+
+Right a[3..5] = [1,3,9]
+
+Call:
+
+merge(a, 0, 2, 5)
+
+
+merge(a,0,2,5):
+Initial:
+
+i = 0, j = 3, k = 0
+temp size = 6 → temp = [ , , , , , ]
+
+
+Step-by-step:
+
+Compare a[0]=4 vs a[3]=1 → take 1 → temp[0]=1, j=4,k=1
+temp: [1, , , , , ]
+
+Compare a[0]=4 vs a[4]=3 → take 3 → temp[1]=3, j=5,k=2
+temp: [1,3, , , , ]
+
+Compare a[0]=4 vs a[5]=9 → take 4 → temp[2]=4, i=1,k=3
+temp: [1,3,4, , , ]
+
+Compare a[1]=7 vs a[5]=9 → take 7 → temp[3]=7, i=2,k=4
+temp: [1,3,4,7, , ]
+
+Compare a[2]=8 vs a[5]=9 → take 8 → temp[4]=8, i=3,k=5
+temp: [1,3,4,7,8, ]
+
+Now i > mid (i=3, mid=2), copy remaining right:
+temp[5] = a[5] = 9, k=6
+
+Final temp = [1,3,4,7,8,9]
+
+Copy back into a[0..5]:
+
+a[0] = 1
+a[1] = 3
+a[2] = 4
+a[3] = 7
+a[4] = 8
+a[5] = 9
+
+Array becomes:
+[1, 3, 4, 7, 8, 9]
+
+✅ Final sorted array (after mergeSort(a, 0, 5)):
+[1, 3, 4, 7, 8, 9]
+
+
+----------------------
+
+After merging (0,0) & (1,1), we had this:
+
+Array = [4, 8, 7, 3, 9, 1]
+
+
+Now we continue exactly from where you asked:
+
+🔵 Back to mergeSort(a, 0, 2)
+
+Earlier we did:
+
+LEFT  → mergeSort(a,0,1)  ✔ (completed)
+RIGHT → mergeSort(a,2,2)  ✔ (single element)
+
+
+Now we must merge the two halves:
+
+Left half = a[0..1] = [4, 8]
+Right half = a[2..2] = [7]
+
+So call:
+
+merge(a, 0, 1, 2)
+
+
+🟢 merge(a, 0, 1, 2) – STEP BY STEP
+
+Initial values:
+i = 0
+j = 2
+mid = 1
+high = 2
+
+temp = [ ]   (empty)
+
+Compare a[i] and a[j]
+| i | j | a[i] | a[j] |
+| - | - | ---- | ---- |
+| 0 | 2 | 4    | 7    |
+
+
+✔ 4 < 7 → copy 4
+
+temp = [4]
+i = 1
+
+
+Next compare:
+| i | j | a[i] | a[j] |
+| - | - | ---- | ---- |
+| 1 | 2 | 8    | 7    |
+
+
+✘ 8 < 7?
+No → copy a[j]
+
+temp = [4, 7]
+j = 3
+
+
+Now:
+
+j = 3 > high (2)
+→ stop comparing
+
+
+🟣 Now copy remaining i elements:
+
+i = 1 ≤ mid (1), so copy a[1]
+
+temp = [4, 7, 8]
+i = 2
+
+Now i > mid → stop.
+
+
+🔥 Now copy temp[] back to a[]
+
+Indexes: 0 to 2
+temp = [4, 7, 8]
+
+a[0] = 4
+a[1] = 7
+a[2] = 8
+
+🎉 Array after merge(a,0,1,2):
+
+[4, 7, 8, 3, 9, 1]
+
+
+🔵 Completed LEFT SIDE (0–2)
+
+The entire left portion is now sorted:
+
+Left sorted = [4, 7, 8]
+
+
+⭐ NEXT STEP (ready?):
+👉 Continue with Right side: mergeSort(a, 3, 5)
+      `
+    },
+    {
+      id: 37,
+      question: "37. Heap Sort – Max-Heap + Heapify.",
+      answer: "",
+      codeExample: `
+⭐ 1. What is Heap Sort? (Easy Words)
+
+Heap Sort is a sorting method that uses a special tree-like structure called a Heap.
+
+There are two types:
+
+Max-Heap → biggest element on top
+Min-Heap → smallest element on top
+
+For Heap Sort, we use a Max-Heap.
+
+
+
+⭐ 2. What is Max-Heap? (Simple Words)
+
+A Max-Heap means:
+
+👉 The largest number is always at the top (root).
+👉 Every parent is bigger than its children.
+
+So we can easily remove the greatest element.
+
+
+
+⭐ 3. What is Heapify? (Very Simple)
+
+Heapify = fixing the heap.
+
+If one element is out of order:
+👉 Heapify moves it down
+👉 Until the heap becomes correct Max-Heap again.
+
+You can remember Heapify as:
+
+“Arrange so that parent is bigger than child.”
+
+
+
+⭐ 4. How Heap Sort Works (Easy Steps)
+
+Heap Sort works in two phases:
+
+⭐ Phase 1: Build Max-Heap
+
+Convert the entire array into a Max-Heap.
+Now the largest element is at index 0.
+
+⭐ Phase 2: Sorting
+
+1. Swap the first element (largest) with the last element
+2. Reduce heap size
+3. Call heapify to fix the heap
+4. Repeat until array is sorted
+
+
+
+⭐ 5. Easy Example
+
+Array:
+
+[4, 10, 3, 5, 1]
+
+Step 1: Convert to Max-Heap → largest goes to first position
+Step 2: Swap first and last
+Step 3: Heapify
+Step 4: Repeat
+
+Final sorted array:
+
+[1, 3, 4, 5, 10]
+
+
+⭐ 6. Heap Sort Algorithm (Easy Version)
+
+HeapSort(A, n):
+
+1. Build a Max-Heap from the array
+2. For i = n-1 down to 1:
+3.     Swap A[0] and A[i]
+4.     Heapify(A, 0, i)
+
+
+⭐ Heapify Algorithm
+
+Heapify(A, i, size):
+
+1. largest = i
+2. left = 2*i + 1
+3. right = 2*i + 2
+
+4. If left < size AND A[left] > A[largest]
+5.     largest = left
+
+6. If right < size AND A[right] > A[largest]
+7.     largest = right
+
+8. If largest != i:
+9.     Swap A[i] and A[largest]
+10.    Heapify(A, largest, size)
+
+
+
+⭐ 7. Simple & Short C Program for Heap Sort
+
+#include <stdio.h>
+
+void heapify(int a[], int n, int i) {
+    int largest = i;
+    int left = 2*i + 1;
+    int right = 2*i + 2;
+    int temp;
+
+    if(left < n && a[left] > a[largest])
+        largest = left;
+
+    if(right < n && a[right] > a[largest])
+        largest = right;
+
+    if(largest != i) {
+        temp = a[i];
+        a[i] = a[largest];
+        a[largest] = temp;
+
+        heapify(a, n, largest);
+    }
+}
+
+void heapSort(int a[], int n) {
+    int i, temp;
+
+    // Build Max-Heap
+    for(i = n/2 - 1; i >= 0; i--)
+        heapify(a, n, i);
+
+    // Sorting
+    for(i = n - 1; i >= 1; i--) {
+        temp = a[0];
+        a[0] = a[i];
+        a[i] = temp;
+
+        heapify(a, i, 0);
+    }
+}
+
+int main() {
+    int n, i;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    int a[n];
+    printf("Enter %d elements:\\n", n);
+    for(i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+
+    heapSort(a, n);
+
+    printf("Sorted array:\\n");
+    for(i = 0; i < n; i++)
+        printf("%d ", a[i]);
+
+    return 0;
+}
+
+
+
+--------------------------------------------------------------
+
+⭐ ARRAY = [8, 4, 7, 3, 9, 1]
+
+n = 6
+
+🔹 BASIC IDEA OF HEAP SORT (1 minute)
+
+First build a Max Heap
+→ largest element comes to index 0
+
+Then swap root with last element
+
+Reduce heap size
+
+Call heapify() again
+
+Repeat until sorted
+
+🔹 STEP 1: main()
+heapSort(a, n);
+
+
+So we enter:
+
+heapSort(a, 6)
+Array = [8, 4, 7, 3, 9, 1]
+
+🔹 STEP 2: BUILD MAX HEAP
+for(i = n/2 - 1; i >= 0; i--)
+    heapify(a, n, i);
+
+Why n/2 - 1?
+
+Last non-leaf node index
+
+For n=6 → 6/2 - 1 = 2
+
+So loop runs:
+
+i = 2, 1, 0
+
+🔵 heapify(a, 6, 2)
+i = 2
+largest = 2
+left = 2*2+1 = 5
+right = 2*2+2 = 6
+
+
+Array:
+
+[8, 4, 7, 3, 9, 1]
+
+
+Check:
+
+left < n → a[5]=1 > a[2]=7 ? NO
+right < n → false
+
+
+No swap → return
+
+🔵 heapify(a, 6, 1)
+i = 1
+largest = 1
+left = 3
+right = 4
+
+
+Values:
+
+a[1]=4, a[3]=3, a[4]=9
+
+
+Check:
+
+a[3] > a[1]? 3>4 NO
+a[4] > a[1]? 9>4 YES → largest=4
+
+
+Swap:
+
+4 ↔ 9
+
+
+Array becomes:
+
+[8, 9, 7, 3, 4, 1]
+
+
+Now recursive call:
+
+heapify(a, 6, 4)
+
+
+At index 4 → no children → return
+
+🔵 heapify(a, 6, 0)
+i = 0
+largest = 0
+left = 1
+right = 2
+
+
+Values:
+
+a[0]=8, a[1]=9, a[2]=7
+
+
+Check:
+
+9 > 8 → largest=1
+7 > 9? NO
+
+
+Swap:
+
+8 ↔ 9
+
+
+Array:
+
+[9, 8, 7, 3, 4, 1]
+
+
+Recursive:
+
+heapify(a, 6, 1)
+
+
+At index 1:
+
+left=3(3), right=4(4)
+Both < 8 → no swap
+
+✅ MAX HEAP BUILT
+[9, 8, 7, 3, 4, 1]
+
+🔹 STEP 3: SORTING PHASE
+for(i = n-1; i >= 1; i--)
+
+🔴 i = 5
+
+Swap root with last:
+
+9 ↔ 1
+
+
+Array:
+
+[1, 8, 7, 3, 4, 9]
+
+
+Call:
+
+heapify(a, 5, 0)
+
+heapify(a,5,0)
+largest=0
+left=1(8)
+right=2(7)
+
+
+Largest = 1 → swap:
+
+1 ↔ 8
+
+
+Array:
+
+[8, 1, 7, 3, 4, 9]
+
+
+Recursive heapify at index 1:
+
+left=3(3)
+right=4(4)
+largest=4
+
+
+Swap:
+
+1 ↔ 4
+
+
+Array:
+
+[8, 4, 7, 3, 1, 9]
+
+🔴 i = 4
+
+Swap:
+
+8 ↔ 1
+
+
+Array:
+
+[1, 4, 7, 3, 8, 9]
+
+
+heapify(a,4,0):
+
+largest=2 (7)
+
+
+Swap:
+
+1 ↔ 7
+
+
+Array:
+
+[7, 4, 1, 3, 8, 9]
+
+
+heapify(a,4,2) → no children
+
+🔴 i = 3
+
+Swap:
+
+7 ↔ 3
+
+
+Array:
+
+[3, 4, 1, 7, 8, 9]
+
+
+heapify(a,3,0):
+
+largest=1 (4)
+
+
+Swap:
+
+3 ↔ 4
+
+
+Array:
+
+[4, 3, 1, 7, 8, 9]
+
+🔴 i = 2
+
+Swap:
+
+4 ↔ 1
+
+
+Array:
+
+[1, 3, 4, 7, 8, 9]
+
+
+heapify(a,2,0):
+
+largest=1
+
+
+Swap:
+
+1 ↔ 3
+
+
+Array:
+
+[3, 1, 4, 7, 8, 9]
+
+🔴 i = 1
+
+Swap:
+
+3 ↔ 1
+
+
+Array:
+
+[1, 3, 4, 7, 8, 9]
+
+
+heap size = 1 → stop
+
+🎉 FINAL SORTED ARRAY
+[1, 3, 4, 7, 8, 9]
+
+
+🔹 VERY SHORT SUMMARY
+
+| Step     | Array         |
+| -------- | ------------- |
+| Original | [8,4,7,3,9,1] |
+| Max Heap | [9,8,7,3,4,1] |
+| Sorted   | [1,3,4,7,8,9] |
+
+
+--------------------------------------------------------------
+
+example: 
+
+
+Given Array
+[8, 4, 7, 3, 9, 1]
+
+🔵 MAX-HEAP SORT (Ascending Order)
+Step 1: Build Max-Heap
+
+Start from last non-leaf index
+
+n = 6 → n/2 - 1 = 2
+
+Heapify at index 2
+      8
+    /   \\
+   4     7
+  / \\   /
+ 3   9 1
+
+
+7 ≥ 1 → OK
+
+[8, 4, 7, 3, 9, 1]
+
+Heapify at index 1
+
+Compare 4 with children (3, 9)
+
+Largest = 9 → swap
+
+[8, 9, 7, 3, 4, 1]
+
+Heapify at index 0
+
+Compare 8 with children (9, 7)
+
+Largest = 9 → swap
+
+[9, 8, 7, 3, 4, 1]
+
+
+✅ Max-Heap built
+
+Step 2: Heap Sort
+Swap root with last element
+[1, 8, 7, 3, 4, 9]
+
+
+Heapify (size = 5):
+
+[8, 4, 7, 3, 1, 9]
+
+Next swap
+[1, 4, 7, 3, 8, 9]
+
+
+Heapify (size = 4):
+
+[7, 4, 1, 3, 8, 9]
+
+Next swap
+[3, 4, 1, 7, 8, 9]
+
+
+Heapify (size = 3):
+
+[4, 3, 1, 7, 8, 9]
+
+Next swap
+[1, 3, 4, 7, 8, 9]
+
+
+Heapify (size = 2):
+
+[3, 1, 4, 7, 8, 9]
+
+Final swap
+[1, 3, 4, 7, 8, 9]
+
+✅ Final Sorted Array (Ascending)
+[1, 3, 4, 7, 8, 9]
+
+
+
+🧠 Key Exam Lines
+
+Max-Heap → largest element at index 0
+Swap root with last
+Reduce heap size
+Heapify again
+Repeat
+
+
+      `
+    },
+    {
+      id: 38,
+      question: "38. Radix Sort – Bucket method.",
+      answer: "",
+      codeExample: `
+⭐ 1. Radix Sort (Easy Explanation)
+
+Radix Sort sorts numbers digit by digit, not by comparing whole numbers.
+
+👉 It starts from the last digit (rightmost)
+👉 Then moves to the next digit
+👉 Continues until the biggest number is fully processed
+
+
+
+⭐ 2. Bucket Method (Very Simple)
+
+In Radix Sort, we use 10 buckets:
+
+Bucket 0 → for digit 0
+Bucket 1 → for digit 1
+Bucket 2 → for digit 2
+...
+Bucket 9 → for digit 9
+
+
+Each number is placed into a bucket based on its current digit.
+
+
+
+⭐ 3. Simple Example
+
+Array:
+
+[170, 45, 75, 90, 802, 24, 2, 66]
+
+
+🔹 Pass 1 (Last digit)
+
+Put numbers into buckets using last digit
+
+Result after collecting:
+
+[170, 90, 802, 2, 24, 45, 75, 66]
+
+
+🔹 Pass 2 (Second digit)
+
+Use middle digit
+
+Result:
+
+[802, 2, 24, 45, 66, 170, 75, 90]
+
+
+🔹 Pass 3 (First digit)
+
+Use first digit
+
+Final sorted array:
+
+[2, 24, 45, 66, 75, 90, 170, 802]
+
+
+⭐ 4. Radix Sort Algorithm (Bucket Method)
+RadixSort(A, n):
+
+1. Find the maximum number in array
+2. Find number of digits in maximum number
+
+3. For each digit position (ones, tens, hundreds):
+4.     Create 10 empty buckets (0 to 9)
+5.     Place each element in bucket according to current digit
+6.     Collect elements from bucket 0 to 9 back into array
+
+
+
+⭐ 5. Simple & Short C Program (Radix Sort using Buckets)
+
+#include <stdio.h>
+
+int getMax(int a[], int n) {
+    int max = a[0];
+    for(int i = 1; i < n; i++)
+        if(a[i] > max)
+            max = a[i];
+    return max;
+}
+
+void radixSort(int a[], int n) {
+    int bucket[10][20], count[10];
+    int i, j, k, exp = 1, max;
+
+    max = getMax(a, n);
+
+    while(max / exp > 0) {
+        for(i = 0; i < 10; i++)
+            count[i] = 0;
+
+        for(i = 0; i < n; i++) {
+            int digit = (a[i] / exp) % 10;
+            bucket[digit][count[digit]++] = a[i];
+        }
+
+        i = 0;
+        for(j = 0; j < 10; j++)
+            for(k = 0; k < count[j]; k++)
+                a[i++] = bucket[j][k];
+
+        exp = exp * 10;
+    }
+}
+
+int main() {
+    int n, i;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    int a[n];
+    printf("Enter %d elements:\\n", n);
+    for(i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+
+    radixSort(a, n);
+
+    printf("Sorted array:\\n");
+    for(i = 0; i < n; i++)
+        printf("%d ", a[i]);
+
+    return 0;
+}
+
+
+⭐ Memory Trick (Exam Ready)
+
+Radix Sort = digit by digit sorting using buckets
+      
+      `
+    },
+    {
+      id: 39,
+      question: "39. Hashing – Hash table + Hash function.",
+      answer: "",
+      codeExample: `
+⭐ 1. What is Hashing? (Very Easy)
+
+Hashing is a technique to store and find data very fast.
+
+👉 We use a key
+👉 A hash function converts the key into an index
+👉 Data is stored at that index in a hash table
+
+⭐ 2. What is a Hash Table? (Simple Words)
+
+A Hash Table is an array used to store data.
+
+Each position is called a slot
+
+Data is stored using a calculated index
+
+Example:
+
+Hash Table Size = 10
+Index: 0 1 2 3 4 5 6 7 8 9
+
+⭐ 3. What is a Hash Function? (Very Simple)
+
+A Hash Function:
+
+Takes a key
+
+Converts it into an index
+
+Example hash function:
+
+h(key) = key % table_size
+
+
+Example:
+
+key = 25
+table_size = 10
+index = 25 % 10 = 5
+
+
+So, data goes to index 5.
+
+⭐ 4. Simple Example
+
+Keys:
+
+15, 25, 35
+
+
+Hash function:
+
+h(key) = key % 10
+
+
+Indexes:
+
+15 → 5
+25 → 5
+35 → 5
+
+
+👉 More than one key gives same index → this is called collision.
+
+⭐ 5. Simple Hashing Algorithm
+HashInsert(key):
+
+1. index = key % table_size
+2. Store key at hash_table[index]
+
+⭐ 6. Collision Handling (Easy)
+
+When two keys get same index:
+
+Store them in the same position using a method
+
+Common methods:
+
+Linear Probing
+
+Chaining
+
+(Only basic idea is enough for exam.)
+
+⭐ 7. Simple & Short C Program (Hash Table with Linear Probing)
+#include <stdio.h>
+#define SIZE 10
+
+int table[SIZE];
+
+void init() {
+    for(int i = 0; i < SIZE; i++)
+        table[i] = -1;
+}
+
+void insert(int key) {
+    int index = key % SIZE;
+
+    while(table[index] != -1) {
+        index = (index + 1) % SIZE;
+    }
+    table[index] = key;
+}
+
+void display() {
+    for(int i = 0; i < SIZE; i++) {
+        if(table[i] == -1)
+            printf("%d : empty\\n", i);
+        else
+            printf("%d : %d\\n", i, table[i]);
+    }
+}
+
+int main() {
+    init();
+
+    insert(15);
+    insert(25);
+    insert(35);
+
+    display();
+
+    return 0;
+}
+
+⭐ Memory Trick (Exam Ready)
+
+Hashing = Key → Hash Function → Index → Hash Table
+      
+      `
+    },
+    {
+      id: 40,
+      question: "40. Collision resolution – Chain & Open addressing.",
+      answer: "",
+      codeExample: `
+⭐ 1. What is Collision? (Very Easy)
+
+A collision happens when:
+👉 Two or more keys get the same index in a hash table.
+
+Example:
+
+Hash function: h(key) = key % 10
+
+15 % 10 = 5
+25 % 10 = 5
+
+
+Both want to go to index 5 → collision.
+
+⭐ 2. Collision Resolution Methods
+
+Two main methods:
+
+Chaining
+
+Open Addressing
+
+⭐ 3. Chaining (Easy Explanation)
+
+In Chaining:
+
+Each index of hash table stores a list
+
+Multiple keys can be stored at the same index
+
+Example:
+
+Keys: 15, 25, 35
+Index: 5
+
+All keys are stored in a list at index 5.
+
+⭐ Simple Chaining Algorithm
+ChainingInsert(key):
+
+1. index = key % table_size
+2. Insert key into list at hash_table[index]
+
+⭐ 4. Open Addressing (Easy Explanation)
+
+In Open Addressing:
+
+Only one key per index
+
+If collision happens:
+→ Find another empty index
+
+Common Open Addressing Methods:
+
+Linear Probing
+
+Quadratic Probing
+
+Double Hashing
+
+(Linear probing is most common)
+
+⭐ 5. Linear Probing (Simple Example)
+
+If index is full:
+
+Try next index → index + 1
+
+
+Example:
+
+Index 5 full → try 6 → try 7 → empty
+
+⭐ 6. Open Addressing Algorithm (Linear Probing)
+OpenAddressInsert(key):
+
+1. index = key % table_size
+2. While hash_table[index] is full:
+3.     index = (index + 1) % table_size
+4. Store key at hash_table[index]
+
+⭐ 7. Simple C Program (Chaining)
+#include <stdio.h>
+#include <stdlib.h>
+#define SIZE 10
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* table[SIZE];
+
+void insert(int key) {
+    int index = key % SIZE;
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = key;
+    newNode->next = table[index];
+    table[index] = newNode;
+}
+
+void display() {
+    for(int i = 0; i < SIZE; i++) {
+        struct Node* temp = table[i];
+        printf("%d : ", i);
+        while(temp) {
+            printf("%d -> ", temp->data);
+            temp = temp->next;
+        }
+        printf("NULL\\n");
+    }
+}
+
+int main() {
+    for(int i = 0; i < SIZE; i++)
+        table[i] = NULL;
+
+    insert(15);
+    insert(25);
+    insert(35);
+
+    display();
+    return 0;
+}
+
+⭐ 8. Simple C Program (Open Addressing – Linear Probing)
+
+
+#include <stdio.h>
+#define SIZE 10
+
+int table[SIZE];
+
+void init() {
+    for(int i = 0; i < SIZE; i++)
+        table[i] = -1;
+}
+
+void insert(int key) {
+    int index = key % SIZE;
+
+    while(table[index] != -1)
+        index = (index + 1) % SIZE;
+
+    table[index] = key;
+}
+
+void display() {
+    for(int i = 0; i < SIZE; i++) {
+        if(table[i] == -1)
+            printf("%d : empty\\n", i);
+        else
+            printf("%d : %d\\n", i, table[i]);
+    }
+}
+
+int main() {
+    init();
+
+    insert(15);
+    insert(25);
+    insert(35);
+
+    display();
+    return 0;
+}
+
+
+
+⭐ Memory Trick (Exam Ready)
+
+Chaining → many keys in one index (list)
+Open Addressing → find next empty index
+      
+      `
+    },
+    {
+      id: 1111,
       question: "",
       answer: "",
-      codeExample: ``
+      codeExample: `
+🟧 FINAL 10 QUESTIONS TO STUDY (MOST LIKELY TO COME)
+
+Linear Search vs Binary Search with algorithm.
+
+Bubble Sort working with diagram.
+
+Selection Sort working.
+
+Insertion Sort working.
+
+Quick Sort – Pivot, Partition, Recursion.--
+
+Merge Sort – Divide, Conquer, Merge.
+
+Heap Sort – Max-Heap + Heapify.
+
+Radix Sort – Bucket method.
+
+Hashing – Hash table + Hash function.
+
+Collision resolution – Chain & Open addressing.
+
+
+
+
+🟦 SUPER IMPORTANT TABLE TO REVISE (Sorting Time Complexity)
+
+| Algorithm | Best           | Average        | Worst      | Space    |
+| --------- | -------------- | -------------- | ---------- | -------- |
+| Bubble    | O(n)           | O(n²)          | O(n²)      | O(1)     |
+| Selection | O(n²)          | O(n²)          | O(n²)      | O(1)     |
+| Insertion | O(n)           | O(n²)          | O(n²)      | O(1)     |
+| Shell     | O(n log n)     | varies         | O(n²)      | O(1)     |
+| Quick     | O(n log n)     | O(n log n)     | O(n²)      | O(log n) |
+| Heap      | O(n log n)     | O(n log n)     | O(n log n) | O(1)     |
+| Merge     | O(n log n)     | O(n log n)     | O(n log n) | O(n)     |
+| Radix     | O(nk)          | O(nk)          | O(nk)      | O(n + k) |
+
+      
+      `
     },
     {
       id: 1,
