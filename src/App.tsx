@@ -2832,26 +2832,28 @@ void deleteBeginning() {
 // Delete from End
 void deleteEnd() {
     if (head == NULL) {
-        printf("List is Empty!\\n");
+        printf("List is Empty!\n");
         return;
     }
 
-    struct Node* temp = head;
-
+    // only one node
     if (head->next == NULL) {
-        printf("%d deleted from end\\n", head->data);
+        printf("%d deleted from end\n", head->data);
         free(head);
         head = NULL;
         return;
     }
 
-    while (temp->next != NULL) {
+    struct Node* temp = head;
+
+    // stop at SECOND LAST node
+    while (temp->next->next != NULL) {
         temp = temp->next;
     }
 
-    printf("%d deleted from end\\n", temp->data);
-    temp->prev->next = NULL;
-    free(temp);
+    printf("%d deleted from end\n", temp->next->data);
+    free(temp->next);
+    temp->next = NULL;
 }
 
 // Delete from Specific Position
@@ -3174,6 +3176,170 @@ connects back to the first node (and vice versa).
     Multiplayer board games (players take turns in a circular fashion).
     Circular buffers (like audio/video streaming).
     Playlist looping in music players.
+
+
+<--------------------------------------------------------------------------------->
+<--------------------------------------------------------------------------------->
+
+
+✅ Complete Singly Circular Linked List Program (C)
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+struct Node *last = NULL;
+
+// Insert at Beginning
+void insertBegin(int value) {
+    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+
+    if (last == NULL) {
+        last = newNode;
+        newNode->next = newNode;
+    } else {
+        newNode->next = last->next;
+        last->next = newNode;
+    }
+}
+
+// Insert at End
+void insertEnd(int value) {
+    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+
+    if (last == NULL) {
+        last = newNode;
+        newNode->next = newNode;
+    } else {
+        newNode->next = last->next;
+        last->next = newNode;
+        last = newNode;
+    }
+}
+
+// Insert at Position
+void insertPos(int value, int pos) {
+    if (pos == 1) {
+        insertBegin(value);
+        return;
+    }
+
+    struct Node *temp = last->next;
+    for (int i = 1; i < pos - 1; i++)
+        temp = temp->next;
+
+    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = temp->next;
+    temp->next = newNode;
+
+    if (temp == last)
+        last = newNode;
+}
+
+// Delete at Beginning
+void deleteBegin() {
+    if (last == NULL) return;
+
+    struct Node *temp = last->next;
+
+    if (temp == last) {
+        free(temp);
+        last = NULL;
+    } else {
+        last->next = temp->next;
+        free(temp);
+    }
+}
+
+// Delete at End
+void deleteEnd() {
+    if (last == NULL) return;
+
+    struct Node *temp = last->next;
+
+    if (temp == last) {
+        free(last);
+        last = NULL;
+        return;
+    }
+
+    while (temp->next != last)
+        temp = temp->next;
+
+    temp->next = last->next;
+    free(last);
+    last = temp;
+}
+
+// Delete at Position
+void deletePos(int pos) {
+    if (pos == 1) {
+        deleteBegin();
+        return;
+    }
+
+    struct Node *temp = last->next;
+    struct Node *prev;
+
+    for (int i = 1; i < pos; i++) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    prev->next = temp->next;
+
+    if (temp == last)
+        last = prev;
+
+    free(temp);
+}
+
+// Display
+void display() {
+    if (last == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+
+    struct Node *temp = last->next;
+    do {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    } while (temp != last->next);
+    printf("\\n");
+}
+
+int main() {
+    insertEnd(10);
+    insertEnd(20);
+    insertEnd(30);
+
+    insertBegin(5);
+    insertPos(15, 3);
+
+    printf("List after insertions: ");
+    display();
+
+    deleteBegin();
+    deleteEnd();
+    deletePos(2);
+
+    printf("List after deletions: ");
+    display();
+
+    return 0;
+}
+
+✅ Output
+List after insertions: 5 10 15 20 30
+List after deletions: 10 20
+
 
 
 <--------------------------------------------------------------------------------->
