@@ -3191,19 +3191,19 @@ struct Node {
     struct Node *next;
 };
 
-struct Node *last = NULL;
+struct Node *head = NULL;
 
 // Insert at Beginning
 void insertBegin(int value) {
     struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = value;
 
-    if (last == NULL) {
-        last = newNode;
+    if (head == NULL) {
+        head = newNode;
         newNode->next = newNode;
     } else {
-        newNode->next = last->next;
-        last->next = newNode;
+        newNode->next = head->next;
+        head->next = newNode;
     }
 }
 
@@ -3212,13 +3212,13 @@ void insertEnd(int value) {
     struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = value;
 
-    if (last == NULL) {
-        last = newNode;
+    if (head == NULL) {
+        head = newNode;
         newNode->next = newNode;
     } else {
-        newNode->next = last->next;
-        last->next = newNode;
-        last = newNode;
+        newNode->next = head->next;
+        head->next = newNode;
+        head = newNode;
     }
 }
 
@@ -3229,7 +3229,7 @@ void insertPos(int value, int pos) {
         return;
     }
 
-    struct Node *temp = last->next;
+    struct Node *temp = head->next;
     for (int i = 1; i < pos - 1; i++)
         temp = temp->next;
 
@@ -3238,43 +3238,43 @@ void insertPos(int value, int pos) {
     newNode->next = temp->next;
     temp->next = newNode;
 
-    if (temp == last)
-        last = newNode;
+    if (temp == head)
+        head = newNode;
 }
 
 // Delete at Beginning
 void deleteBegin() {
-    if (last == NULL) return;
+    if (head == NULL) return;
 
-    struct Node *temp = last->next;
+    struct Node *temp = head->next;
 
-    if (temp == last) {
+    if (temp == head) {
         free(temp);
-        last = NULL;
+        head = NULL;
     } else {
-        last->next = temp->next;
+        head->next = temp->next;
         free(temp);
     }
 }
 
 // Delete at End
 void deleteEnd() {
-    if (last == NULL) return;
+    if (head == NULL) return;
 
-    struct Node *temp = last->next;
+    struct Node *temp = head->next;
 
-    if (temp == last) {
-        free(last);
-        last = NULL;
+    if (temp == head) {
+        free(head);
+        head = NULL;
         return;
     }
 
-    while (temp->next != last)
+    while (temp->next != head)
         temp = temp->next;
 
-    temp->next = last->next;
-    free(last);
-    last = temp;
+    temp->next = head->next;
+    free(head);
+    head = temp;
 }
 
 // Delete at Position
@@ -3284,7 +3284,7 @@ void deletePos(int pos) {
         return;
     }
 
-    struct Node *temp = last->next;
+    struct Node *temp = head->next;
     struct Node *prev;
 
     for (int i = 1; i < pos; i++) {
@@ -3294,24 +3294,24 @@ void deletePos(int pos) {
 
     prev->next = temp->next;
 
-    if (temp == last)
-        last = prev;
+    if (temp == head)
+        head = prev;
 
     free(temp);
 }
 
 // Display
 void display() {
-    if (last == NULL) {
-        printf("List is empty\n");
+    if (head == NULL) {
+        printf("List is empty\\n");
         return;
     }
 
-    struct Node *temp = last->next;
+    struct Node *temp = head->next;
     do {
         printf("%d ", temp->data);
         temp = temp->next;
-    } while (temp != last->next);
+    } while (temp != head->next);
     printf("\\n");
 }
 
