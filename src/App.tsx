@@ -9345,68 +9345,324 @@ Collision resolution – Chain & Open addressing.
       `
     },
     {
-      id: 1,
-      question: "",
+      id: 41,
+      question: "41. explain ShellSort",
       answer: "",
-      codeExample: ``
-    },
-    {
-      id: 1,
-      question: "",
-      answer: "",
-      codeExample: ``
-    },
-    {
-      id: 1,
-      question: "",
-      answer: "",
-      codeExample: ``
-    },
-    {
-      id: 1,
-      question: "",
-      answer: "",
-      codeExample: ``
-    },
-    {
-      id: 1,
-      question: "",
-      answer: "",
-      codeExample: ``
-    },
-    {
-      id: 1,
-      question: "",
-      answer: "",
-      codeExample: ``
-    },
-    {
-      id: 1,
-      question: "",
-      answer: "",
-      codeExample: ``
-    },
-    {
-      id: 1,
-      question: "",
-      answer: "",
-      codeExample: ``
-    },
-    {
-      id: 1,
-      question: "",
-      answer: "",
-      codeExample: ``
-    },
-    {
-      id: 1,
-      question: "",
-      answer: "",
-      codeExample: ``
-    },
+      codeExample: `
+⭐ 1. What is Shell Sort? (Very Easy)
+
+Shell Sort is an improved version of Insertion Sort.
+
+    👉 Instead of comparing nearby elements only,
+    👉 It compares elements that are far apart first,
+    👉 Then gradually reduces the gap.
+
+This makes sorting faster than normal insertion sort.
+
+
+⭐ 2. Simple Example
+
+Array:
+
+[8, 3, 7, 4, 9, 2]
+
+Choose gap values:
+
+gap = n/2, then gap/2, then 1
+
+First gap = 3
+Second gap = 1
+
+
+After final pass (gap = 1), array becomes sorted:
+
+[2, 3, 4, 7, 8, 9]
 
 
 
+⭐ 3. Shell Sort Algorithm (Easy & Short)
+ShellSort(A, n):
+
+1. Set gap = n / 2
+2. While gap > 0:
+3.     For i = gap to n-1:
+4.         temp = A[i]
+5.         j = i
+6.         While j >= gap AND A[j-gap] > temp:
+7.             A[j] = A[j-gap]
+8.             j = j - gap
+9.         A[j] = temp
+10.    gap = gap / 2
+
+
+
+⭐ 4. Simple & Short C Program (Shell Sort)
+
+#include <stdio.h>
+
+int main() {
+    int n, i, j, gap, temp;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+
+    int a[n];
+    printf("Enter %d elements:\\n", n);
+    for(i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+
+    for(gap = n / 2; gap > 0; gap = gap / 2) {
+        for(i = gap; i < n; i++) {
+            temp = a[i];
+            j = i;
+            while(j >= gap && a[j - gap] > temp) {
+                a[j] = a[j - gap];
+                j = j - gap;
+            }
+            a[j] = temp;
+        }
+    }
+
+    printf("Sorted array:\\n");
+    for(i = 0; i < n; i++)
+        printf("%d ", a[i]);
+
+    return 0;
+}
+
+
+
+⭐ Memory Trick (Exam Ready)
+
+Shell Sort = Insertion Sort + Gap
+
+
+-------------------------------------------------------------
+
+
+⭐ ARRAY = [8, 4, 7, 3, 9, 1]
+n = 6
+
+🔹 WHAT IS SHELL SORT (VERY SIMPLE)
+
+Shell sort is Insertion Sort with gaps.
+
+Instead of comparing adjacent elements, it:
+
+Uses a gap
+
+Sorts elements gap distance apart
+
+Reduces the gap
+
+Finally gap = 1 → normal insertion sort
+
+🔹 STEP 1: INPUT DONE
+a = [8, 4, 7, 3, 9, 1]
+
+🔹 STEP 2: GAP LOOP
+for(gap = n / 2; gap > 0; gap = gap / 2)
+
+Initial gap:
+gap = 6 / 2 = 3
+
+============================================
+🔵 GAP = 3
+
+We compare elements 3 positions apart
+
+Subarrays formed (index based):
+
+(0,3) → [8,3]
+(1,4) → [4,9]
+(2,5) → [7,1]
+
+🔹 i = 3
+temp = a[3] = 3
+j = 3
+
+
+Compare:
+
+a[j-gap] = a[0] = 8 > temp (3)
+
+
+Shift:
+
+a[3] = a[0] → 8
+j = 0
+
+
+Insert temp:
+
+a[0] = 3
+
+
+Array becomes:
+
+[3, 4, 7, 8, 9, 1]
+
+🔹 i = 4
+temp = a[4] = 9
+j = 4
+
+
+Check:
+
+a[1] = 4 > 9 ? NO
+
+
+No shift → insert temp back
+
+Array unchanged:
+
+[3, 4, 7, 8, 9, 1]
+
+🔹 i = 5
+temp = a[5] = 1
+j = 5
+
+
+Compare:
+
+a[2] = 7 > 1 → YES
+
+
+Shift:
+
+a[5] = 7
+j = 2
+
+
+Insert temp:
+
+a[2] = 1
+
+
+Array becomes:
+
+[3, 4, 1, 8, 9, 7]
+
+✅ AFTER GAP = 3 PASS
+[3, 4, 1, 8, 9, 7]
+
+============================================
+🔵 NEXT GAP
+gap = gap / 2 = 3 / 2 = 1
+
+
+Now gap = 1 → NORMAL INSERTION SORT
+
+============================================
+🔵 GAP = 1
+🔹 i = 1
+temp = 4
+Compare a[0]=3 > 4 ? NO
+
+
+Array unchanged:
+
+[3, 4, 1, 8, 9, 7]
+
+🔹 i = 2
+temp = 1
+
+
+Compare & shift:
+
+4 > 1 → shift
+3 > 1 → shift
+
+
+Insert:
+
+a[0] = 1
+
+
+Array:
+
+[1, 3, 4, 8, 9, 7]
+
+🔹 i = 3
+temp = 8
+4 > 8 ? NO
+
+
+Array unchanged:
+
+[1, 3, 4, 8, 9, 7]
+
+🔹 i = 4
+temp = 9
+8 > 9 ? NO
+
+
+Array unchanged:
+
+[1, 3, 4, 8, 9, 7]
+
+🔹 i = 5
+temp = 7
+
+
+Shift:
+
+9 > 7 → shift
+8 > 7 → shift
+
+
+Insert:
+
+a[3] = 7
+
+
+Array:
+
+[1, 3, 4, 7, 8, 9]
+
+🎉 FINAL SORTED ARRAY
+[1, 3, 4, 7, 8, 9]
+
+
+
+🔹 LINE-BY-LINE MEANING (SHORT)
+gap = n/2;
+
+
+Start with big gap
+
+temp = a[i];
+
+
+Store current value
+
+while(j >= gap && a[j-gap] > temp)
+
+
+Shift larger elements gap distance apart
+
+a[j] = temp;
+
+
+Insert element in correct position
+
+
+✅ FINAL SUMMARY TABLE
+
+| Gap     | Array         |
+| ------- | ------------- |
+| Initial | [8,4,7,3,9,1] |
+| gap=3   | [3,4,1,8,9,7] |
+| gap=1   | [1,3,4,7,8,9] |
+      
+      `
+    },
+    {
+      id: 1,
+      question: "",
+      answer: "",
+      codeExample: ``
+    }
   ];
 
   const toggleQuestion = (id: number) => {
